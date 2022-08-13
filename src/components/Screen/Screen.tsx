@@ -7,7 +7,7 @@ interface IScreenProps extends React.HTMLProps<HTMLDivElement> {
 
 const Screen: React.FC<IScreenProps> = ({ className, children, ...props }) => (
   <div
-    className={cx('w-screen h-screen bg-slate-100', className)}
+    className={cx('w-screen h-screen', className)}
     data-testid="content-area"
     {...props}
   >

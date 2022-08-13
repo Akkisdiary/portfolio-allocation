@@ -31,24 +31,24 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
 
   return (
     <div
-      className="flex justify-between p-2 border rounded text-start bg-slate-100"
+      className="grid grid-cols-6 px-4 py-2 text-sm gap-2 items-center"
       data-testid="holdings-list-item"
     >
-      <div>
-        <h3>{ticker.symbol}</h3>
-        <p className="text-slate-500">{ticker.name}</p>
-        <p className="text-slate-500">{ticker.sector}</p>
+      <div className="col-span-2">
+        <h3 className="font-bold">{ticker.symbol}</h3>
+        <p className="text-slate-500 text-sm">{ticker.name}</p>
       </div>
-      <div>
-        <p className="font-bold">{ticker.price}</p>
+      <div className="col-span-1">{ticker.price}</div>
+      <div className="col-span-2">{ticker.sector}</div>
+      <div className="col-span-1">
+        <Input
+          type="number"
+          min={1}
+          value={ticker.quantity}
+          onChange={updateQuantity}
+          className="pl-2 py-1 pr-1 max-w-[4rem]"
+        />
       </div>
-      <Input
-        type="number"
-        min={1}
-        value={ticker.quantity}
-        onChange={updateQuantity}
-        className="px-2 rounded-md shadow"
-      />
     </div>
   );
 };

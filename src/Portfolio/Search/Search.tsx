@@ -10,7 +10,7 @@ import Suggestion from './Suggestion';
 const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ className, ...props }) => (
   <input
     className={cx(
-      'px-8 py-1 rounded-md block font-light border border-transparent focus:border-slate-200 transition-colors placeholder-slate-500 outline-0 bg-slate-200 focus:bg-white',
+      'px-8 py-1 flex-1 ring-0 rounded-md block w-full font-light transition-colors placeholder-slate-500 outline-0 border bg-slate-200 focus:bg-white hover:bg-slate-100 hover:border-slate-200',
       className
     )}
     {...props}

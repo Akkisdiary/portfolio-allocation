@@ -2,6 +2,7 @@ export const tickerData = [
   {
     name: 'aaa',
     symbol: 'AAA',
+    exchange: 'Exchange 1',
     url: 'https://example.com/ticker/aaa',
     country: 'country 1',
     industry: 'industry 1',
@@ -13,6 +14,7 @@ export const tickerData = [
   {
     name: 'bbb',
     symbol: 'BBB',
+    exchange: 'Exchange 1',
     url: 'https://example.com/ticker/bbb',
     country: 'country 1',
     industry: 'industry 1',
@@ -24,6 +26,7 @@ export const tickerData = [
   {
     name: 'ccc',
     symbol: 'CCC',
+    exchange: 'Exchange 3',
     url: 'https://example.com/ticker/ccc',
     country: 'country 2',
     industry: 'industry 1',
@@ -35,6 +38,7 @@ export const tickerData = [
   {
     name: 'ddd',
     symbol: 'DDD',
+    exchange: 'Exchange 2',
     url: 'https://example.com/ticker/ddd',
     country: 'country 2',
     industry: 'industry 1',

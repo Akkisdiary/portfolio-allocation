@@ -11,6 +11,7 @@ const tickers = [
   {
     url: 'https://www.investing.com/equities/google-inc-company-profile',
     price: 120.96,
+    exchange: 'Stock - NASDAQ equities',
     industry: 'Interactive Media & Services',
     sector: 'Communication Services',
     market: 'United States',
@@ -22,6 +23,7 @@ const tickers = [
   {
     url: 'https://www.investing.com/equities/amazon-com-inc-company-profile',
     price: 143.84,
+    exchange: 'Stock - NASDAQ equities',
     industry: 'Internet & Direct Marketing Retail',
     sector: 'Consumer Discretionary',
     market: 'United States',

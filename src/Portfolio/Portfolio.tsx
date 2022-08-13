@@ -2,25 +2,28 @@ import React from 'react';
 
 import Manager from './Manager';
 import Search from './Search';
-import TickersList from './HoldingsList';
+import HoldingsList from './HoldingsList';
 import Chart from './Chart';
 import { Screen } from '../components';
 
 const Portfolio: React.FC = () => {
   return (
-    <Screen>
-      <Manager>
-        <div className="h-full flex flex-col">
-          <div className="mt-8 mb-16 flex justify-center">
-            <Search />
+    <Manager>
+      <Screen>
+        <div className="h-full max-h-full grid grid-cols-2 p-4">
+          <div className="flex flex-col">
+            <h1 className="text-2xl font-extrabold">Protfolio by Sector</h1>
+            <div className="pb-2 pt-4">
+              <Search />
+            </div>
+            <HoldingsList />
           </div>
-          <div className="flex-1 grid grid-cols-2">
-            <TickersList />
-            {/* <Chart /> */}
+          <div className="w-full max-h-screen">
+            <Chart />
           </div>
         </div>
-      </Manager>
-    </Screen>
+      </Screen>
+    </Manager>
   );
 };
 

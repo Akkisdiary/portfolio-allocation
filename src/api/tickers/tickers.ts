@@ -1,5 +1,5 @@
-import { Endpoints } from "../endpoints/endpoints";
-import { Ticker, TickerDetail } from "./types";
+import { Endpoints } from '../endpoints/endpoints';
+import { Ticker, TickerDetail } from './types';
 
 interface SearchResponse {
   results: Ticker[];
@@ -8,12 +8,13 @@ interface SearchResponse {
 
 interface DetailResponse {
   url: string;
+  name: string;
+  symbol: string;
+  exchange: string;
   price: number;
   industry: string;
   sector: string;
   market: string;
-  name: string;
-  symbol: string;
   country: string;
   // status_code: string;
 }
@@ -22,7 +23,7 @@ export const search = async (query: string): Promise<Ticker[]> => {
   const ep = Endpoints.TickerSearch(query);
 
   const res = await fetch(ep, {
-    headers: { accept: "application/json" },
+    headers: { accept: 'application/json' },
   });
 
   const data: SearchResponse = await res.json();
@@ -32,11 +33,10 @@ export const search = async (query: string): Promise<Ticker[]> => {
 export const detail = async (url: string): Promise<TickerDetail> => {
   const ep = Endpoints.TickerDetail(url);
 
-  
   const res = await fetch(ep, {
-    headers: { accept: "application/json" },
+    headers: { accept: 'application/json' },
   });
-  
-  const data: DetailResponse =  await res.json();
+
+  const data: DetailResponse = await res.json();
   return data;
 };

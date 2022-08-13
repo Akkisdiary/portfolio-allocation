@@ -2,7 +2,7 @@ export interface Ticker {
   url: string;
   name: string;
   symbol: string;
-  // exchange: string;
+  exchange: string;
 }
 
 export interface TickerDetail extends Ticker {

@@ -11,6 +11,7 @@ const tickers = [
     name: 'Alphabet Inc Class A - Google',
     symbol: 'GOOGL',
     quantity: '1',
+    exchange: 'Stock - NASDAQ equities',
   },
 ];
 

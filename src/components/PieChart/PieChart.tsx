@@ -12,13 +12,14 @@ const PieChart: React.FC<IPieChartProps> = ({ data }) => {
     <ResponsiveContainer width="100%" height="100%">
       <PChart>
         <Pie
-          dataKey="value"
-          isAnimationActive={false}
           data={data}
+          outerRadius={120}
+          dataKey="value"
           cx="50%"
           cy="50%"
-          outerRadius={80}
           fill="#8884d8"
+          animationDuration={100}
+          isAnimationActive
           label
         />
         <Tooltip />
