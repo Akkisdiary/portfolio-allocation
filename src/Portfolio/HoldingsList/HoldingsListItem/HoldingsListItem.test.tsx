@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, screen, waitFor, within } from '@testing-library/react';
 
 import { setUpServer } from '../../../api/mock/utils';
 import { renderTickersList } from '../HoldingsList.test';
@@ -53,7 +53,16 @@ describe('<HoldingsListItem />', () => {
     });
   });
 
-  it('should remove ticker from list', () => {
-    // TODO: should remove ticker from list
+  it('should remove ticker from list', async () => {
+    renderTickersList(tickers);
+
+    const list = await screen.findAllByTestId('holdings-list-item');
+    const listLength = list.length;
+    const btn = within(list[0]).getByTestId('delete-btn');
+    fireEvent.click(btn);
+
+    await waitFor(() => {
+      expect(screen.queryAllByTestId('holdings-list-item')).toHaveLength(listLength - 1);
+    });
   });
 });

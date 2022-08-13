@@ -30,8 +30,15 @@ const Manager: React.FC<{
     return tickers.filter((tik) => !!tik.sector);
   }, [tickers]);
 
+  const removeTicker = (symbolToRemove: string) => {
+    const updatedValue = tickers.filter((tik) => tik.symbol !== symbolToRemove);
+    setTickers(updatedValue);
+  };
+
   return (
-    <PortfolioCtx.Provider value={{ tickers, updateTicker, addTicker, availableTickers }}>
+    <PortfolioCtx.Provider
+      value={{ tickers, updateTicker, addTicker, availableTickers, removeTicker }}
+    >
       {children}
     </PortfolioCtx.Provider>
   );

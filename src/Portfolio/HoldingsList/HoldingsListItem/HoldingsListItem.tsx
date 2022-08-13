@@ -4,14 +4,14 @@ import { usePortfolio } from '../../Manager/hooks';
 import type { TickerHolding } from '../../Manager/types';
 import TickerApi from '../../../api';
 import Input from '../../../components/Input';
-import { Skeleton } from '../../../components';
+import { Skeleton, DeleteBtn } from '../../../components';
 
 interface ITickersListItemProps {
   ticker: TickerHolding;
 }
 
 const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
-  const { updateTicker } = usePortfolio();
+  const { updateTicker, removeTicker } = usePortfolio();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -33,6 +33,8 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
     updateTicker(ticker.symbol, updatedValue);
   };
 
+  const handleRemoveTicker = () => removeTicker(ticker.symbol);
+
   return (
     <div
       className="grid grid-cols-6 px-4 py-2 text-sm gap-2 items-center"
@@ -44,7 +46,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
       </div>
       <div className="col-span-1">{isLoading ? <Skeleton.Text size="sm" /> : ticker.price}</div>
       <div className="col-span-2">{isLoading ? <Skeleton.Text /> : ticker.sector}</div>
-      <div className="col-span-1">
+      <div className="col-span-1 inline-flex items-center gap-1">
         <Input
           type="number"
           min={1}
@@ -52,6 +54,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
           onChange={updateQuantity}
           className="pl-2 py-1 pr-1 max-w-[4rem]"
         />
+        <DeleteBtn onClick={handleRemoveTicker} />
       </div>
     </div>
   );

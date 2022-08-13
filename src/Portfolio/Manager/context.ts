@@ -8,6 +8,7 @@ export interface IPortfolioCtx {
   updateTicker: (symbol: string, newValue: TickerHolding) => void;
   addTicker: (tik: Ticker) => void;
   availableTickers: () => TickerHolding[];
+  removeTicker: (symbolToRemove: string) => void;
 }
 
 const PortfolioCtx = createContext<IPortfolioCtx>({
@@ -15,6 +16,7 @@ const PortfolioCtx = createContext<IPortfolioCtx>({
   updateTicker: () => {},
   addTicker: () => {},
   availableTickers: () => [],
+  removeTicker: () => {}
 });
 
 export default PortfolioCtx;
