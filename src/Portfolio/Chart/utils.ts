@@ -1,21 +1,25 @@
-import { DataPoint } from "../../components/PieChart/types";
-import { SelectedTickerDetail } from "../types";
+import { ChartDataPoint } from '../../components/PieChart/types';
+import { TickerHolding } from '../Manager/types';
 
-const colors = ["red", "green", "blue", "purple", "yellow"];
+const colors = ['red', 'green', 'blue', 'purple', 'yellow'];
 
 export const generateChartData = (
-  data: SelectedTickerDetail[],
-  key: keyof SelectedTickerDetail
-): DataPoint[] => {
+  data: TickerHolding[],
+  key: keyof TickerHolding
+): ChartDataPoint[] => {
   const memo: {
     [key: string]: number;
   } = {};
 
   for (const tik of data) {
-    const name = tik[key]!.toString();
-    const value = tik.price! * tik.quantity!;
+    if (tik['quantity'] !== undefined && tik['price'] !== undefined) {
+      const quantity = parseInt(tik.quantity);
 
-    memo[name] = memo[name] ? memo[name] + value : value;
+      const name = tik[key]!;
+      const value = tik.price! * quantity;
+
+      memo[name] = memo[name] ? memo[name] + value : value;
+    }
   }
 
   const result = Object.entries(memo).map(([k, v], idx) => {

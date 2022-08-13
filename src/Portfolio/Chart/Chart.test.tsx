@@ -1,29 +1,17 @@
-import React from 'react';
+import { cleanup, render } from '@testing-library/react';
 
-import { render } from '@testing-library/react';
-
-import { tickerData } from './data';
-import Portfolio from '../Portfolio';
+import Manager from '../Manager';
 import Chart from './Chart';
+import { tickerData } from './data';
 
-jest.mock("recharts", () => {
-  const OriginalModule = jest.requireActual("recharts");
-  return {
-    ...OriginalModule,
-    ResponsiveContainer: ({ children }: { children: React.ReactNode }) => (
-      <OriginalModule.ResponsiveContainer width={800} height={800}>
-        {children}
-      </OriginalModule.ResponsiveContainer>
-    ),
-  };
-});
+afterEach(cleanup);
 
-describe("<Chart />", () => {
-  it("should render chart", () => {
+describe('<Chart />', () => {
+  it('should render chart from ticker data', () => {
     render(
-      <Portfolio initialData={tickerData}>
+      <Manager initialData={tickerData}>
         <Chart />
-      </Portfolio>
+      </Manager>
     );
   });
 });

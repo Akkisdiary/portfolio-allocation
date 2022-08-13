@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import Tickers from "../../../api";
-import { usePortfolio } from "../../../Portfolio";
+import React, { useEffect } from 'react';
 
-import { SelectedTickerDetail } from "../../../Portfolio/types";
+import { usePortfolio } from '../../Manager/hooks';
+import type { TickerHolding } from '../../Manager/types';
+import TickerApi from '../../../api';
+import Input from '../../../components/Input';
 
 interface ITickersListItemProps {
-  ticker: SelectedTickerDetail;
+  ticker: TickerHolding;
 }
 
 const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
@@ -13,7 +14,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
 
   useEffect(() => {
     if (!ticker.sector) {
-      Tickers.detail(ticker.url).then((d) => {
+      TickerApi.detail(ticker.url).then((d) => {
         const updatedData = { ...ticker, ...d };
         updateTicker(ticker.symbol, updatedData);
       });
@@ -23,7 +24,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
   const updateQuantity = (e: React.FormEvent<HTMLInputElement>) => {
     const updatedValue = {
       ...ticker,
-      quantity: parseInt(e.currentTarget.value) || undefined,
+      quantity: e.currentTarget.value,
     };
     updateTicker(ticker.symbol, updatedValue);
   };
@@ -31,7 +32,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
   return (
     <div
       className="flex justify-between p-2 border rounded text-start bg-slate-100"
-      data-testid="ticker-list-item"
+      data-testid="holdings-list-item"
     >
       <div>
         <h3>{ticker.symbol}</h3>
@@ -41,7 +42,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
       <div>
         <p className="font-bold">{ticker.price}</p>
       </div>
-      <input
+      <Input
         type="number"
         min={1}
         value={ticker.quantity}

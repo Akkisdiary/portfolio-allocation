@@ -1,18 +1,27 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
-import Portfolio from "./Portfolio";
-import TickerList from "../components/TickersList";
+import Portfolio from './Portfolio';
+import { setUpServer } from '../api/mock/utils';
+import { searchInput, suggsBoxToBeVisible } from './Search/Search.test';
 
-afterEach(cleanup);
+setUpServer([cleanup]);
 
-const renderTickerList = () => {
-  render(
-    <Portfolio>
-      <TickerList />
-    </Portfolio>
-  );
-};
+describe('<Portfolio App />', () => {
+  it('should add ticker suggestion from search to holdings list', async () => {
+    render(<Portfolio />);
 
-describe("<Portfolio - TickerList />", () => {
-  it("should fetch ticker detail", () => {});
+    const search = searchInput();
+
+    search.focus();
+    fireEvent.change(search, { target: { value: 'google' } });
+
+    const opt = (await screen.findAllByRole('option'))[0];
+    fireEvent.click(opt);
+
+    expect(await screen.findAllByTestId('holdings-list-item')).toHaveLength(1);
+  });
+
+  it('should render holdings as pie chart', () => {
+    render(<Portfolio />);
+  });
 });

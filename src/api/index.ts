@@ -1,10 +1,10 @@
-import { search, detail } from "./tickers";
-import type { Ticker, TickerDetail } from "./tickers/types";
+import { search, detail } from './tickers';
+import type { Ticker, TickerDetail } from './tickers/types';
 
-export * from "./endpoints";
-export * from "./tickers";
+export * from './endpoints';
+export * from './tickers';
 
-const Symbols: {
+const TickerApi: {
   search: (q: string) => Promise<Ticker[]>;
   detail: (symbol: string) => Promise<TickerDetail>;
 } = {
@@ -12,4 +12,4 @@ const Symbols: {
   detail,
 };
 
-export default Symbols;
+export default TickerApi;

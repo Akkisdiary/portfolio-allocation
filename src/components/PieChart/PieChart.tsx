@@ -1,13 +1,13 @@
 import React from 'react';
 import { Pie, PieChart as PChart, ResponsiveContainer, Tooltip } from 'recharts';
 
-import { DataPoint } from './types';
+import { ChartDataPoint } from './types';
 
 interface IPieChartProps {
-    data: DataPoint[];
+  data: ChartDataPoint[];
 }
 
-const PieChart: React.FC<IPieChartProps> = ({data}) => {
+const PieChart: React.FC<IPieChartProps> = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PChart>

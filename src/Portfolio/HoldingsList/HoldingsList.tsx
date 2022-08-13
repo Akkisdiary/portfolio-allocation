@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { usePortfolio } from '../../Portfolio';
-import TickersListItem from './TickersListItem';
+import { usePortfolio } from '../Manager/hooks';
+import TickersListItem from './HoldingsListItem';
 
 const TickersList: React.FC<{}> = () => {
   const { tickers } = usePortfolio();

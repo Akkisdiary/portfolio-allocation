@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import Autosuggest, { SuggestionSelectedEventData } from 'react-autosuggest';
+import cx from 'classnames';
+import Autosuggest, { type SuggestionSelectedEventData } from 'react-autosuggest';
 
-import Tickers, { Ticker } from '../../api';
-import { usePortfolio } from '../../Portfolio';
+import TickerApi from '../../api';
+import type { Ticker } from '../../api';
+import { usePortfolio } from '../Manager/hooks';
 import Suggestion from './Suggestion';
 
+const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ className, ...props }) => (
+  <input
+    className={cx(
+      'px-8 py-1 rounded-md block font-light border border-transparent focus:border-slate-200 transition-colors placeholder-slate-500 outline-0 bg-slate-200 focus:bg-white',
+      className
+    )}
+    {...props}
+  />
+);
+
 const Search: React.FC<{}> = (_) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [suggs, setSuggs] = useState<Ticker[]>([]);
 
   const { addTicker } = usePortfolio();
@@ -19,11 +31,9 @@ const Search: React.FC<{}> = (_) => {
   };
 
   const clearSuggs = () => setSuggs([]);
-  const fetchSuggs = ({
-    value: newValue,
-  }: Autosuggest.SuggestionsFetchRequestedParams) => {
+  const fetchSuggs = ({ value: newValue }: Autosuggest.SuggestionsFetchRequestedParams) => {
     if (newValue) {
-      Tickers.search(newValue).then((d) => {
+      TickerApi.search(newValue).then((d) => {
         setSuggs(d);
       });
     }
@@ -34,7 +44,7 @@ const Search: React.FC<{}> = (_) => {
     { suggestion }: SuggestionSelectedEventData<Ticker>
   ) => {
     addTicker(suggestion);
-    setValue("");
+    setValue('');
   };
 
   return (
@@ -46,11 +56,11 @@ const Search: React.FC<{}> = (_) => {
       renderSuggestion={(tik: Ticker) => <Suggestion ticker={tik} />}
       onSuggestionSelected={handleAddTicker}
       inputProps={{
-        placeholder: "Search Stocks",
+        placeholder: 'Search Stocks',
         value: value,
         onChange: changeHandler,
-        className: "px-4 py-2 mb-1 border rounded shadow",
       }}
+      renderInputComponent={SearchInput}
     />
   );
 };

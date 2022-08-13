@@ -1,5 +1,3 @@
-import PortfolioBySector from "./Portfolio"
+import Portfolio from './Portfolio';
 
-export * from "./context";
-export * from "./types";
-export default PortfolioBySector;
+export default Portfolio;
