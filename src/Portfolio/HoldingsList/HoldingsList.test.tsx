@@ -48,4 +48,10 @@ describe('<HoldingsList />', () => {
     const items = screen.getAllByTestId('holdings-list-item');
     expect(items).toHaveLength(2);
   });
+
+  it('should show call to action message if no stocks are added to portfolio', () => {
+    renderTickersList([]);
+    const msg = screen.getByText(/search stocks to add them here/i);
+    expect(msg).toBeVisible();
+  });
 });

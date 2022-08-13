@@ -13,7 +13,7 @@ const PieChart: React.FC<IPieChartProps> = ({ data }) => {
       <PChart>
         <Pie
           data={data}
-          outerRadius={120}
+          outerRadius={160}
           dataKey="value"
           cx="50%"
           cy="50%"

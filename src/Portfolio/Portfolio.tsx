@@ -9,20 +9,20 @@ import { Screen } from '../components';
 const Portfolio: React.FC = () => {
   return (
     <Manager>
-      <Screen>
-        <div className="h-full max-h-full grid grid-cols-2 p-4">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-extrabold">Protfolio by Sector</h1>
-            <div className="pb-2 pt-4">
-              <Search />
-            </div>
-            <HoldingsList />
+      <div className="grid grid-cols-2">
+        <div className="flex flex-col px-2 mb-16 mt-8">
+          <h1 className="text-2xl font-extrabold">Protfolio by Sector</h1>
+          <div className="sticky top-0 mb-2 pt-2 bg-white rounded-b-md">
+            <Search />
           </div>
-          <div className="w-full max-h-screen">
+          <HoldingsList />
+        </div>
+        <div className="min-h-screen">
+          <div className="fixed max-w-6/12 w-6/12 h-full top-0 right-0">
             <Chart />
           </div>
         </div>
-      </Screen>
+      </div>
     </Manager>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import cx from 'classnames';
 import Autosuggest, { type SuggestionSelectedEventData } from 'react-autosuggest';
 
@@ -6,15 +6,20 @@ import TickerApi from '../../api';
 import type { Ticker } from '../../api';
 import { usePortfolio } from '../Manager/hooks';
 import Suggestion from './Suggestion';
+import { SearchIcon } from '../../components';
 
 const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ className, ...props }) => (
-  <input
-    className={cx(
-      'px-8 py-1 flex-1 ring-0 rounded-md block w-full font-light transition-colors placeholder-slate-500 outline-0 border bg-slate-200 focus:bg-white hover:bg-slate-100 hover:border-slate-200',
-      className
-    )}
-    {...props}
-  />
+  <div className="relative text-slate-500 w-full">
+    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+      <SearchIcon />
+    </span>
+    <input
+      type="search"
+      className="py-2 text-sm w-full bg-slate-100 shadow-sm rounded-md pl-10 focus:outline-none focus:bg-white border transition translate-colors focus:shadow-md focus:border-slate-300 text-slate-700 placeholder-slate-500"
+      autoComplete="off"
+      {...props}
+    />
+  </div>
 );
 
 const Search: React.FC<{}> = (_) => {
