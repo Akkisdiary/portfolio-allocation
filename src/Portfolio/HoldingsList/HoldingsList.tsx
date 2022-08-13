@@ -7,7 +7,7 @@ const HoldingsList: React.FC = () => {
   const { tickers } = usePortfolio();
 
   return (
-    <div className="rounded-md border border-slate-200">
+    <div className="rounded-md border border-slate-200 text-slate-800">
       <div className="font-bold grid grid-cols-6 w-full border-transparent border border-b-slate-200 px-4 py-2">
         <div className="col-span-2">Name</div>
         <div className="col-span-1">CMP</div>

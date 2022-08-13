@@ -42,8 +42,15 @@ describe('<HoldingsListItem />', () => {
     });
   });
 
-  it('should show loading while getting price', () => {
-    // TODO: should show loading while getting price
+  it('should show loading while getting price', async () => {
+    renderTickersList(tickers);
+    const loaders = await screen.findAllByRole('status');
+
+    expect(loaders.length).toBeGreaterThan(0);
+    loaders.forEach((loader) => expect(loader).toBeVisible());
+    await waitFor(() => {
+      loaders.forEach((loader) => expect(loader).not.toBeVisible());
+    });
   });
 
   it('should remove ticker from list', () => {
