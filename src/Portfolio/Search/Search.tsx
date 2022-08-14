@@ -8,13 +8,13 @@ import Suggestion from './Suggestion';
 import { SearchIcon } from '../../components';
 
 const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ className, ...props }) => (
-  <div className="relative text-slate-500 w-full">
+  <div className="relative w-full text-slate-500">
     <span className="absolute inset-y-0 left-0 flex items-center pl-2">
       <SearchIcon />
     </span>
     <input
       type="search"
-      className="py-2 text-sm w-full bg-slate-100 shadow-sm rounded-md pl-10 focus:outline-none focus:bg-white border transition translate-colors focus:shadow-md focus:border-slate-300 text-slate-700 placeholder-slate-500"
+      className="translate-colors w-full rounded-md border bg-slate-100 py-2 pl-10 text-sm text-slate-700 placeholder-slate-500 shadow-sm transition focus:border-slate-300 focus:bg-white focus:shadow-md focus:outline-none"
       autoComplete="off"
       {...props}
     />
