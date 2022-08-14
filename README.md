@@ -20,13 +20,13 @@ You can access the live demo [here]("http://TODO").
 
 #### 2. Run React App
 
-- Install React Dependencies
+Install React Dependencies
 
 ```bash
 npm install
 ```
 
-- Start Server
+Start Server
 
 ```bash
 npm start
@@ -34,7 +34,7 @@ npm start
 
 ## Test
 
-- Run tests
+Run tests
 
 ```bash
 npm run test
