@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import cx from 'classnames';
 import Autosuggest, { type SuggestionSelectedEventData } from 'react-autosuggest';
 
 import TickerApi from '../../api';
