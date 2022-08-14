@@ -4,6 +4,5 @@ export { default as Input } from './Input';
 export { default as Button } from './Button';
 export { default as DeleteBtn } from './DeleteBtn';
 export { default as Skeleton } from './Skeleton';
-export { default as SearchIcon } from './SearchIcon';
-export { default as Spinner } from './Spinner';
-export { default as TrashIcon } from './TrashIcon';
+export { default as SearchIcon } from './Icons/SearchIcon';
+export * from './Icons';

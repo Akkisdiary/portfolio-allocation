@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import Autosuggest, { type SuggestionSelectedEventData } from 'react-autosuggest';
 
 import TickerApi from '../../api';
@@ -21,7 +21,7 @@ const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ classNam
   </div>
 );
 
-const Search: React.FC<{}> = (_) => {
+const Search: React.FC = (_) => {
   const [value, setValue] = useState('');
   const [suggs, setSuggs] = useState<Ticker[]>([]);
 
