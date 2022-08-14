@@ -1,14 +1,18 @@
 import React, { useCallback, useState } from 'react';
 
-import PortfolioCtx from './context';
+import PortfolioCtx, { DEFAULT_SELECTED_CATEGORY, SELECTABLE_CATEGORIES } from './context';
+
 import type { Ticker } from '../../api';
-import type { TickerHolding } from './types';
+import type { SelectableCategory, TickerHolding } from './types';
 
 const Manager: React.FC<{
   initialData?: TickerHolding[];
+  selectableCategories?: SelectableCategory[];
   children?: React.ReactNode;
-}> = ({ children, initialData = [] }) => {
+}> = ({ children, initialData = [], selectableCategories = SELECTABLE_CATEGORIES }) => {
   const [tickers, setTickers] = useState<TickerHolding[]>(initialData);
+  const [selectedCategory, setSelectedCategory] =
+    useState<SelectableCategory>(DEFAULT_SELECTED_CATEGORY);
 
   const updateTicker = (symbol: string, newValue: TickerHolding) => {
     const updated = tickers.map((tik) => {
@@ -35,9 +39,20 @@ const Manager: React.FC<{
     setTickers(updatedValue);
   };
 
+  const updateSelectedCategory = (cat: SelectableCategory) => setSelectedCategory(cat);
+
   return (
     <PortfolioCtx.Provider
-      value={{ tickers, updateTicker, addTicker, availableTickers, removeTicker }}
+      value={{
+        tickers,
+        selectableCategories,
+        selectedCategory,
+        updateTicker,
+        addTicker,
+        availableTickers,
+        removeTicker,
+        updateSelectedCategory,
+      }}
     >
       {children}
     </PortfolioCtx.Provider>

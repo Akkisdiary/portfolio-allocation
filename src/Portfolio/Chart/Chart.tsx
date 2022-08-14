@@ -5,9 +5,9 @@ import { usePortfolio } from '../Manager/hooks';
 import { generateChartData } from './utils';
 
 const Chart: React.FC = () => {
-  const { availableTickers } = usePortfolio();
+  const { availableTickers, selectedCategory } = usePortfolio();
 
-  const chartData = generateChartData(availableTickers(), 'sector');
+  const chartData = generateChartData(availableTickers(), selectedCategory);
 
   return <PieChart data={chartData} />;
 };

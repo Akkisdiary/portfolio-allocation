@@ -4,20 +4,22 @@ import { usePortfolio } from '../Manager/hooks';
 import HoldingsListItem from './HoldingsListItem';
 
 const HoldingsList: React.FC = () => {
-  const { tickers } = usePortfolio();
+  const { tickers, selectedCategory } = usePortfolio();
 
   return (
-    <div className="rounded-md border border-slate-200 text-slate-800">
-      <div className="font-bold grid grid-cols-6 w-full border-transparent border border-b-slate-200 px-4 py-2">
+    <div className="rounded-md border border-slate-200 bg-white text-slate-800">
+      <div className="grid w-full grid-cols-6 border border-transparent border-b-slate-200 px-4 py-2 font-bold">
         <div className="col-span-2">Name</div>
         <div className="col-span-1">CMP</div>
-        <div className="col-span-2">Sector</div>
+        <div className="col-span-2">
+          <span className="capitalize">{selectedCategory}</span>
+        </div>
         <div className="col-span-1">Qty</div>
       </div>
       {tickers.length ? (
         tickers.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
       ) : (
-        <div className="col-span-6 text-center w-full py-4 text-sm text-slate-500">
+        <div className="col-span-6 w-full py-4 text-center text-sm text-slate-500">
           <p>Search stocks to add them here</p>
         </div>
       )}
