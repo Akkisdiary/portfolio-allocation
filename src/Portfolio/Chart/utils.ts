@@ -1,5 +1,6 @@
 import { ChartDataPoint } from '../../components/PieChart/types';
-import { SelectableCategory, TickerHolding } from '../Manager/types';
+import type { SelectableCategory, TickerHolding } from '../Manager/types';
+import { Metric } from '../Manager/types';
 
 import type { ChartData } from 'chart.js';
 
@@ -19,6 +20,9 @@ const colors = [
   '#f472b6',
 ];
 
+/**
+ * Deprecated - Now using chartjs
+ */
 export const generateChartData = (
   data: TickerHolding[],
   key: SelectableCategory
@@ -48,7 +52,8 @@ export const generateChartData = (
 
 export const generateDoughNutChartData = (
   data: TickerHolding[],
-  key: SelectableCategory
+  key: SelectableCategory,
+  metric: Metric
 ): ChartData<'doughnut'> => {
   const memo: {
     [key: string]: number;
@@ -75,6 +80,15 @@ export const generateDoughNutChartData = (
     const c = colors[idx % colors.length];
     bgColors.push(c);
   });
+
+  if (metric === Metric.PERCENTAGE) {
+    const total = values.reduce((accumulator, value) => accumulator + value, 0);
+    console.log(total);
+    for (let i = 0; i < values.length; i++) {
+      const percentage = (values[i] / total) * 100;
+      values[i] = Math.round((percentage + Number.EPSILON) * 100) / 100;
+    }
+  }
 
   return {
     labels: labels,

@@ -8,14 +8,9 @@ import { generateDoughNutChartData } from './utils';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart: React.FC = () => {
-  const { availableTickers, selectedCategory } = usePortfolio();
+  const { availableTickers, selectedCategory, metric } = usePortfolio();
 
-  const getChartData = useCallback(
-    () => generateDoughNutChartData(availableTickers(), selectedCategory),
-    [availableTickers, selectedCategory]
-  );
-
-  const chartData = getChartData();
+  const chartData = generateDoughNutChartData(availableTickers(), selectedCategory, metric);
 
   return (
     <Doughnut

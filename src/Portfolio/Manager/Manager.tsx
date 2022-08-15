@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import PortfolioCtx, { DEFAULT_SELECTED_CATEGORY, SELECTABLE_CATEGORIES } from './context';
 
 import type { Ticker } from '../../api';
-import type { SelectableCategory, TickerHolding } from './types';
+import { Metric, SelectableCategory, TickerHolding } from './types';
 
 const Manager: React.FC<{
   initialData?: TickerHolding[];
@@ -13,6 +13,7 @@ const Manager: React.FC<{
   const [tickers, setTickers] = useState<TickerHolding[]>(initialData);
   const [selectedCategory, setSelectedCategory] =
     useState<SelectableCategory>(DEFAULT_SELECTED_CATEGORY);
+  const [metric, setMetric] = useState(Metric.PERCENTAGE);
 
   const updateTicker = (symbol: string, newValue: TickerHolding) => {
     const updated = tickers.map((tik) => {
@@ -47,6 +48,8 @@ const Manager: React.FC<{
         tickers,
         selectableCategories,
         selectedCategory,
+        metric,
+        setMetric,
         updateTicker,
         addTicker,
         availableTickers,

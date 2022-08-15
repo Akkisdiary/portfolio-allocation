@@ -5,3 +5,8 @@ export interface TickerHolding extends TickerDetail {
 }
 
 export type SelectableCategory = Exclude<keyof TickerHolding, 'quantity' | 'price' | 'name'>;
+
+export enum Metric {
+  VALUE = 'value',
+  PERCENTAGE = 'percentage',
+}
