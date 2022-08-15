@@ -24,6 +24,7 @@ export const search = async (query: string): Promise<Ticker[]> => {
 
   const res = await fetch(ep, {
     headers: { accept: 'application/json' },
+    referrerPolicy: 'unsafe-url',
   });
 
   const data: SearchResponse = await res.json();
@@ -35,6 +36,7 @@ export const detail = async (url: string): Promise<TickerDetail> => {
 
   const res = await fetch(ep, {
     headers: { accept: 'application/json' },
+    referrerPolicy: 'unsafe-url',
   });
 
   const data: DetailResponse = await res.json();
