@@ -11,7 +11,8 @@ import './styles.css';
 const Portfolio: React.FC = () => {
   return (
     <Manager>
-      <div className="background-image grid grid-cols-2">
+      <div className="relative grid grid-cols-2">
+        <div className="bg-grid absolute inset-0 -z-10"></div>
         <div className="mb-16 mt-8 flex flex-col px-2" data-testid="holdings-section">
           <h1 className="text-3xl font-extrabold text-slate-700">Protfolio by Sector</h1>
           <div className="sticky top-0 mb-2 rounded-b-md pt-2">

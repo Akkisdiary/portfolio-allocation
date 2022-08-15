@@ -83,7 +83,6 @@ export const generateDoughNutChartData = (
 
   if (metric === Metric.PERCENTAGE) {
     const total = values.reduce((accumulator, value) => accumulator + value, 0);
-    console.log(total);
     for (let i = 0; i < values.length; i++) {
       const percentage = (values[i] / total) * 100;
       values[i] = Math.round((percentage + Number.EPSILON) * 100) / 100;
