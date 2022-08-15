@@ -1,5 +1,5 @@
 import { tickerData } from './data';
-import { generateChartData } from './utils';
+import { generateChartData, generateDoughNutChartData } from './utils';
 
 describe('utils()', () => {
   it('should convert given ticker data to chart data', () => {
@@ -32,4 +32,17 @@ describe('utils()', () => {
   });
 });
 
-describe('<Chart />', () => {});
+describe('utils(2)', () => {
+  it('generateDoughNutChartData() - should convert given ticker data to doughnut chart data', () => {
+    const result1 = generateDoughNutChartData(tickerData, 'sector');
+
+    expect(result1).toStrictEqual({
+      labels: ['sector 1', 'sector 2'],
+      datasets: [
+        {
+          data: [120 * 2 + 84 * 12, 94 * 2 + 35 * 10],
+        },
+      ],
+    });
+  });
+});

@@ -18,9 +18,9 @@ const Portfolio: React.FC = () => {
           </div>
           <HoldingsList />
         </div>
-        <div className="min-h-screen" data-testid="graph-section">
-          <div className="max-w-6/12 fixed top-0 right-0 h-full w-6/12">
-            <div className="absolute right-4 top-8 z-10 flex gap-2">
+        <div className="h-full min-h-screen" data-testid="graph-section">
+          <div className="sticky top-0 p-2">
+            <div className="absolute right-2 top-2 mt-4 mr-4 flex gap-2">
               <CategorySelection />
             </div>
             <Chart />
