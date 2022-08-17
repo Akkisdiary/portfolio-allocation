@@ -1,8 +1,8 @@
 import { Endpoints } from '../endpoints/endpoints';
-import { Ticker, TickerDetail } from './types';
+import type { TickerDetail } from './types';
 
 interface SearchResponse {
-  results: Ticker[];
+  results: TickerDetail[];
   status_code: number;
 }
 
@@ -19,7 +19,7 @@ interface DetailResponse {
   // status_code: string;
 }
 
-export const search = async (query: string): Promise<Ticker[]> => {
+export const search = async (query: string): Promise<TickerDetail[]> => {
   const ep = Endpoints.TickerSearch(query);
 
   const res = await fetch(ep, {
@@ -30,13 +30,12 @@ export const search = async (query: string): Promise<Ticker[]> => {
   return data.results;
 };
 
-export const detail = async (url: string): Promise<TickerDetail> => {
+export const detail = async (url: string): Promise<unknown> => {
   const ep = Endpoints.TickerDetail(url);
 
   const res = await fetch(ep, {
     headers: { accept: 'application/json' },
   });
 
-  const data: DetailResponse = await res.json();
-  return data;
+  return await res.json();
 };

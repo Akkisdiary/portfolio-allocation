@@ -7,11 +7,17 @@ setUpServer([cleanup]);
 
 const tickers = [
   {
-    url: 'https://www.investing.com/equities/google-inc-company-profile',
-    name: 'Alphabet Inc Class A - Google',
-    symbol: 'GOOGL',
+    id: 'NASDAQ:GOOG',
+    symbol: 'GOOG',
+    name: 'Alphabet Inc.',
+    price: 122.72,
+    sector: 'Technology Services',
+    industry: 'Internet Software/Services',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/GOOG/',
     quantity: '1',
-    exchange: 'Stock - NASDAQ equities',
   },
 ];
 
@@ -19,12 +25,13 @@ describe('<HoldingsListItem />', () => {
   it('should show stock name and symbol', () => {
     renderTickersList(tickers);
     expect(screen.getByText(/Alphabet Inc/i)).toBeVisible();
-    expect(screen.getByText('GOOGL')).toBeVisible();
+    expect(screen.getByText('GOOG')).toBeVisible();
   });
 
-  it('should fetch and display ticker detail', async () => {
+  it('should display ticker price and sector', async () => {
     renderTickersList(tickers);
-    expect(await screen.findByText(/119.70/i)).toBeVisible();
+    expect(await screen.findByText(/122.72/i)).toBeVisible();
+    expect(await screen.findByText(/Technology Services/i)).toBeVisible();
   });
 
   it('should have input box with provided quantity', () => {
@@ -39,17 +46,6 @@ describe('<HoldingsListItem />', () => {
     fireEvent.change(input, { target: { value: 4 } });
     await waitFor(() => {
       expect(input.value).toBe('4');
-    });
-  });
-
-  it('should show loading while getting price', async () => {
-    renderTickersList(tickers);
-    const loaders = await screen.findAllByRole('status');
-
-    expect(loaders.length).toBeGreaterThan(0);
-    loaders.forEach((loader) => expect(loader).toBeVisible());
-    await waitFor(() => {
-      loaders.forEach((loader) => expect(loader).not.toBeVisible());
     });
   });
 

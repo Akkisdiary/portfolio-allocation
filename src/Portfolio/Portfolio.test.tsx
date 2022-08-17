@@ -1,56 +1,42 @@
-import {
-  render,
-  screen,
-  cleanup,
-  fireEvent,
-  waitFor,
-  within,
-  prettyDOM,
-} from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 
-import Portfolio from './Portfolio';
 import { setUpServer } from '../api/mock/utils';
-import { searchInput } from './Search/Search.test';
+import Portfolio from './Portfolio';
+import { getSearchInput } from './Search/utils';
 
 setUpServer([cleanup]);
 
-const withinHoldingsSection = () => within(screen.getByTestId('holdings-section'));
+const getGraphSection = () => screen.getByTestId('graph-section');
+const getHoldingsList = () => screen.getByTestId('holdings-list');
 
-const waitForLoaders = async () => {
-  const loaders = screen.getAllByRole('status');
-  await waitFor(() => {
-    loaders.forEach((loader) => expect(loader).not.toBeInTheDocument());
-  });
-};
-
-describe('<Portfolio App />', () => {
+describe('<Portfolio />', () => {
   it('should add ticker suggestion from search to holdings list', async () => {
     render(<Portfolio />);
 
-    const search = searchInput();
+    const search = getSearchInput();
+    const holdingsList = getHoldingsList();
 
-    expect(withinHoldingsSection().queryAllByTestId('holdings-list-item')).toHaveLength(0);
+    expect(within(holdingsList).getByText(/search stocks/i)).toBeVisible();
 
-    search.focus();
-    fireEvent.change(search, { target: { value: 'google' } });
+    act(() => {
+      search.focus();
+      fireEvent.change(search, { target: { value: 'goog' } });
+    });
 
-    const opt = (await withinHoldingsSection().findAllByRole('option'))[0];
-    fireEvent.click(opt);
+    const opt = await screen.findAllByText(/alphabet/i);
+    fireEvent.click(opt[0]);
 
-    expect(await withinHoldingsSection().findAllByTestId('holdings-list-item')).toHaveLength(1);
-
-    await waitForLoaders();
-
-    screen.debug();
+    expect(await within(holdingsList).findAllByTestId('holdings-list-item')).toHaveLength(1);
   });
 
   it('should change the selected category column title', async () => {
     render(<Portfolio />);
 
-    const graphSection = screen.getByTestId('graph-section');
-    const holdingsList = screen.getByTestId('holdings-list');
+    const graphSection = getGraphSection();
+    const holdingsList = getHoldingsList();
 
-    const categorySelector: HTMLSelectElement = within(graphSection).getByRole('combobox');
+    const categorySelector: HTMLSelectElement =
+      within(graphSection).getByTestId('category-selection');
 
     expect(categorySelector.value).toBe('sector');
     expect(within(holdingsList).getByText(/sector/i)).toBeVisible();

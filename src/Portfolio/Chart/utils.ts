@@ -1,8 +1,7 @@
-import { ChartDataPoint } from '../../components/PieChart/types';
-import type { SelectableCategory, TickerHolding } from '../Manager/types';
-import { Metric } from '../Manager/types';
+import { Metric } from '../Manager';
 
 import type { ChartData } from 'chart.js';
+import type { SelectableCategory, TickerHolding } from '../Manager';
 
 const colors = [
   '#f87171',
@@ -20,36 +19,6 @@ const colors = [
   '#f472b6',
 ];
 
-/**
- * Deprecated - Now using chartjs
- */
-export const generateChartData = (
-  data: TickerHolding[],
-  key: SelectableCategory
-): ChartDataPoint[] => {
-  const memo: {
-    [key: string]: number;
-  } = {};
-
-  for (const tik of data) {
-    if (tik['quantity'] !== undefined && tik['price'] !== undefined) {
-      const quantity = parseInt(tik.quantity);
-
-      const name = tik[key]!;
-      const value = tik.price! * quantity;
-
-      memo[name] = memo[name] ? memo[name] + value : value;
-    }
-  }
-
-  const result = Object.entries(memo).map(([k, v], idx) => {
-    const c = colors[idx % colors.length];
-    return { name: k.toString(), value: Math.round(v), fill: c };
-  });
-
-  return result;
-};
-
 export const generateDoughNutChartData = (
   data: TickerHolding[],
   key: SelectableCategory,
@@ -60,14 +29,12 @@ export const generateDoughNutChartData = (
   } = {};
 
   for (const tik of data) {
-    if (tik['quantity'] !== undefined && tik['price'] !== undefined) {
-      const quantity = parseInt(tik.quantity);
+    const quantity = tik.quantity ? parseInt(tik.quantity) : 0;
 
-      const name = tik[key]!;
-      const value = tik.price! * quantity;
+    const name = tik[key];
+    const value = tik.price * quantity;
 
-      memo[name] = memo[name] ? memo[name] + value : value;
-    }
+    memo[name] = memo[name] ? memo[name] + value : value;
   }
 
   const labels: string[] = [];

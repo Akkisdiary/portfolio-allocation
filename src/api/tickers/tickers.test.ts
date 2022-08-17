@@ -12,33 +12,20 @@ afterAll(() => server.close());
 
 describe('Tickers.search()', () => {
   it('should return list of stocks', async () => {
-    const stocks = await Tickers.search('google');
+    const stocks = await Tickers.search('goog');
     expect(stocks).toStrictEqual([
       {
-        url: 'https://www.investing.com/equities/google-inc-company-profile',
-        name: 'Alphabet Inc Class A - Google',
-        symbol: 'GOOGL',
-        exchange: 'Stock - NASDAQ equities',
+        id: 'NASDAQ:GOOG',
+        symbol: 'GOOG',
+        name: 'Alphabet Inc.',
+        price: 122.72,
+        sector: 'Technology Services',
+        industry: 'Internet Software/Services',
+        currency: 'USD',
+        exchange: 'NASDAQ',
+        country: 'United States',
+        // url: 'https://www.tradingview.com/symbols/GOOG/',
       },
     ]);
-  });
-});
-
-describe('Tickers.detail()', () => {
-  it('should return stock detail', async () => {
-    const stocks = await Tickers.detail(
-      'https://www.investing.com/equities/google-inc-company-profile'
-    );
-    expect(stocks).toStrictEqual({
-      url: 'https://www.investing.com/equities/google-inc-company-profile',
-      price: '119.70',
-      industry: 'Interactive Media & Services',
-      sector: 'Communication Services',
-      market: 'United States',
-      name: 'Alphabet Inc Class A - Google',
-      symbol: 'GOOGL',
-      country: 'United States',
-      status_code: 200,
-    });
   });
 });

@@ -1,60 +1,60 @@
-import { tickerData } from './data';
-import { generateChartData, generateDoughNutChartData } from './utils';
-import { Metric } from '../Manager/types';
+import { data } from '../../api/mock/server';
+import { Metric } from '../Manager';
+import { generateDoughNutChartData } from './utils';
 
-describe('utils()', () => {
-  it('should convert given ticker data to chart data', () => {
-    const result1 = generateChartData(tickerData, 'sector');
-    expect(result1).toStrictEqual(
-      expect.objectContaining([
-        {
-          name: 'sector 1',
-          value: 120 * 2 + 84 * 12,
-          fill: expect.any(String),
-        },
-        {
-          name: 'sector 2',
-          value: 94 * 2 + 35 * 10,
-          fill: expect.any(String),
-        },
-      ])
-    );
-
-    const result2 = generateChartData(tickerData, 'industry');
-    expect(result2).toStrictEqual(
-      expect.objectContaining([
-        {
-          name: 'industry 1',
-          value: 120 * 2 + 84 * 12 + 94 * 2 + 35 * 10,
-          fill: expect.any(String),
-        },
-      ])
-    );
-  });
+const holdings = data.map((d) => {
+  return { quantity: '1', ...d };
 });
 
 describe('generateDoughNutChartData()', () => {
-  it('should convert given ticker data to chart data metric as value', () => {
-    const result1 = generateDoughNutChartData(tickerData, 'sector', Metric.VALUE);
+  it('convert by provided key', () => {
+    const result1 = generateDoughNutChartData(holdings, 'sector', Metric.VALUE);
 
     expect(result1).toMatchObject({
-      labels: ['sector 1', 'sector 2'],
+      labels: ['Technology Services', 'Retail Trade', 'Electronic Technology', 'Consumer Durables'],
       datasets: [
         {
-          data: [120 * 2 + 84 * 12, 94 * 2 + 35 * 10], // total: 1786
+          data: [549.2735, 144.34, 173.14, 927.5],
+        },
+      ],
+    });
+
+    const result2 = generateDoughNutChartData(holdings, 'industry', Metric.VALUE);
+
+    expect(result2).toMatchObject({
+      labels: [
+        'Internet Software/Services',
+        'Internet Retail',
+        'Telecommunications Equipment',
+        'Motor Vehicles',
+      ],
+      datasets: [
+        {
+          data: [549.2735, 144.34, 173.14, 927.5],
         },
       ],
     });
   });
 
-  it('should convert given ticker data to chart data metric as percentage', () => {
-    const result1 = generateDoughNutChartData(tickerData, 'sector', Metric.PERCENTAGE);
+  it('convert by provided metric', () => {
+    const result1 = generateDoughNutChartData(holdings, 'sector', Metric.PERCENTAGE);
 
     expect(result1).toMatchObject({
-      labels: ['sector 1', 'sector 2'],
+      labels: ['Technology Services', 'Retail Trade', 'Electronic Technology', 'Consumer Durables'],
       datasets: [
         {
-          data: [69.87681970884658, 30.123180291153417], // total: 100%
+          data: [30.61, 8.04, 9.65, 51.69], // total: 100%
+        },
+      ],
+    });
+
+    const result2 = generateDoughNutChartData(holdings, 'sector', Metric.VALUE);
+
+    expect(result2).toMatchObject({
+      labels: ['Technology Services', 'Retail Trade', 'Electronic Technology', 'Consumer Durables'],
+      datasets: [
+        {
+          data: [549.2735, 144.34, 173.14, 927.5], // total: 100%
         },
       ],
     });

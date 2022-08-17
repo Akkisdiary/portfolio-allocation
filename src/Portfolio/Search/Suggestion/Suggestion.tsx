@@ -1,10 +1,12 @@
 import cx from 'classnames';
 import React from 'react';
-import { Ticker } from '../../../api';
+
+import { TickerDetail } from '../../../api';
+
 import type { RenderSuggestionParams } from 'react-autosuggest';
 
 interface ISuggestionProps {
-  suggestion: Ticker;
+  suggestion: TickerDetail;
   params?: RenderSuggestionParams;
 }
 
@@ -14,8 +16,10 @@ const Suggestion: React.FC<ISuggestionProps> = ({
 }) => (
   <div
     className={cx(
-      'z-40 flex cursor-pointer border-x bg-white px-4 py-1 text-sm text-slate-500 hover:border-slate-500 hover:bg-slate-100',
-      { 'border-slate-500 bg-slate-200': isHighlighted }
+      'z-40 flex cursor-pointer items-center bg-white px-4 py-1 text-sm text-slate-500 hover:bg-slate-100',
+      {
+        'bg-slate-200': isHighlighted,
+      }
     )}
   >
     <div className="flex-1">

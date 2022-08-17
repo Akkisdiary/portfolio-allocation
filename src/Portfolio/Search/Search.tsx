@@ -1,4 +1,3 @@
-import cx from 'classnames';
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 
@@ -9,7 +8,7 @@ import Suggestion from './Suggestion';
 
 import type { SuggestionSelectedEventData } from 'react-autosuggest';
 
-import type { Ticker } from '../../api';
+import type { TickerDetail } from '../../api';
 
 const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ className, ...props }) => (
   <div className="relative z-50 w-full text-slate-500">
@@ -27,7 +26,7 @@ const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ classNam
 
 const Search: React.FC = (_) => {
   const [value, setValue] = useState('');
-  const [suggs, setSuggs] = useState<Ticker[]>([]);
+  const [suggs, setSuggs] = useState<TickerDetail[]>([]);
 
   const { addTicker } = usePortfolio();
 
@@ -49,18 +48,18 @@ const Search: React.FC = (_) => {
 
   const handleAddTicker = (
     _: React.FormEvent<HTMLElement>,
-    { suggestion }: SuggestionSelectedEventData<Ticker>
+    { suggestion }: SuggestionSelectedEventData<TickerDetail>
   ) => {
     addTicker(suggestion);
     setValue('');
   };
 
   return (
-    <Autosuggest<Ticker>
+    <Autosuggest<TickerDetail>
       suggestions={suggs}
       onSuggestionsFetchRequested={fetchSuggs}
       onSuggestionsClearRequested={clearSuggs}
-      getSuggestionValue={(tik: Ticker) => tik.symbol}
+      getSuggestionValue={(tik) => tik.symbol}
       renderSuggestion={(s, p) => <Suggestion suggestion={s} params={p} />}
       onSuggestionSelected={handleAddTicker}
       inputProps={{

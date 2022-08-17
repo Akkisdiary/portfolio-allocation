@@ -1,38 +1,80 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-import { Ticker } from '../tickers/types';
+import type { TickerDetail } from '../tickers/types';
 
-const data: Ticker[] = [
+export const data: TickerDetail[] = [
   {
-    url: 'https://www.investing.com/equities/facebook-inc-company-profile',
-    name: 'Meta Platforms Inc',
+    id: 'NASDAQ:META',
     symbol: 'META',
-    exchange: 'Stock - NASDAQ equities',
+    name: 'Meta Platforms, Inc.',
+    price: 179.3385,
+    sector: 'Technology Services',
+    industry: 'Internet Software/Services',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/META/',
   },
   {
-    url: 'https://www.investing.com/equities/amazon-com-inc-company-profile',
-    name: 'Amazon.com Inc',
+    id: 'NASDAQ:AMZN',
     symbol: 'AMZN',
-    exchange: 'Stock - NASDAQ equities',
+    name: 'Amazon.com, Inc.',
+    price: 144.34,
+    sector: 'Retail Trade',
+    industry: 'Internet Retail',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/AMZN/',
   },
   {
-    url: 'https://www.investing.com/equities/apple-computer-inc-company-profile',
-    name: 'Apple Inc',
+    id: 'NASDAQ:AAPL',
     symbol: 'AAPL',
-    exchange: 'Stock - NASDAQ equities',
+    name: 'Apple Inc.',
+    price: 173.14,
+    sector: 'Electronic Technology',
+    industry: 'Telecommunications Equipment',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/AAPL/',
   },
   {
-    url: 'https://www.investing.com/equities/netflix,-inc.-company-profile',
-    name: 'Netflix Inc',
+    id: 'NASDAQ:GOOG',
+    symbol: 'GOOG',
+    name: 'Alphabet Inc.',
+    price: 122.72,
+    sector: 'Technology Services',
+    industry: 'Internet Software/Services',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/GOOG/',
+  },
+  {
+    id: 'NASDAQ:NFLX',
     symbol: 'NFLX',
-    exchange: 'Stock - NASDAQ equities',
+    name: 'Netflix, Inc.',
+    price: 247.215,
+    sector: 'Technology Services',
+    industry: 'Internet Software/Services',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/NFLX/',
   },
   {
-    url: 'https://www.investing.com/equities/google-inc-company-profile',
-    name: 'Alphabet Inc Class A - Google',
-    symbol: 'GOOGL',
-    exchange: 'Stock - NASDAQ equities',
+    id: 'NASDAQ:TSLA',
+    symbol: 'TSLA',
+    name: 'Tesla, Inc.',
+    price: 927.5,
+    sector: 'Consumer Durables',
+    industry: 'Motor Vehicles',
+    currency: 'USD',
+    exchange: 'NASDAQ',
+    country: 'United States',
+    // url: 'https://www.tradingview.com/symbols/TSLA/',
   },
 ];
 
@@ -40,31 +82,13 @@ const handlers = [
   rest.get('*/search', (req, res, ctx) => {
     const query = req.url.searchParams.get('query');
 
-    const result = data.filter((d) => new RegExp(query!, 'i').test(d.name));
+    const result = data.filter((d) => new RegExp(query!, 'i').test(d.symbol));
 
     return res(
       ctx.status(200),
       ctx.json({
         status_code: 200,
         results: result,
-      })
-    );
-  }),
-  rest.get('*/detail', (req, res, ctx) => {
-    const url = req.url.searchParams.get('url');
-
-    return res(
-      ctx.status(200),
-      ctx.json({
-        url: url,
-        price: '119.70',
-        industry: 'Interactive Media & Services',
-        sector: 'Communication Services',
-        market: 'United States',
-        name: 'Alphabet Inc Class A - Google',
-        symbol: 'GOOGL',
-        country: 'United States',
-        status_code: 200,
       })
     );
   }),

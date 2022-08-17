@@ -1,14 +1,12 @@
-export interface Ticker {
-  url: string;
-  name: string;
+export interface TickerDetail {
+  id: string;
   symbol: string;
+  name: string;
+  price: number;
+  sector: string;
+  industry: string;
+  currency: string;
   exchange: string;
-}
-
-export interface TickerDetail extends Ticker {
-  price?: number;
-  industry?: string;
-  sector?: string;
-  market?: string;
-  country?: string;
+  country: string;
+  // url: string;
 }

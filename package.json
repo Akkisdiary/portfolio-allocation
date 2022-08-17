@@ -27,7 +27,8 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -56,6 +57,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.8",
     "gh-pages": "^4.0.0",
+    "jest-canvas-mock": "^2.4.0",
     "msw": "^0.44.2",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",

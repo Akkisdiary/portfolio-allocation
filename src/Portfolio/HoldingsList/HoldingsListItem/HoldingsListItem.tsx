@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { usePortfolio } from '../../Manager/hooks';
-import type { TickerHolding } from '../../Manager/types';
-import TickerApi from '../../../api';
+import { DeleteBtn, Skeleton } from '../../../components';
 import Input from '../../../components/Input';
-import { Skeleton, DeleteBtn } from '../../../components';
+import { usePortfolio } from '../../Manager';
+
+import type { TickerHolding } from '../../Manager';
 
 interface ITickersListItemProps {
   ticker: TickerHolding;
@@ -13,17 +13,6 @@ interface ITickersListItemProps {
 const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
   const { updateTicker, removeTicker, selectedCategory } = usePortfolio();
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!ticker.sector) {
-      setIsLoading(true);
-      TickerApi.detail(ticker.url).then((d) => {
-        const updatedData = { ...ticker, ...d };
-        updateTicker(ticker.symbol, updatedData);
-        setIsLoading(false);
-      });
-    }
-  }, [ticker, updateTicker]);
 
   const updateQuantity = (e: React.FormEvent<HTMLInputElement>) => {
     const updatedValue = {

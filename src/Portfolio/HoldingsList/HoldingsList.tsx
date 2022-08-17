@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePortfolio } from '../Manager/hooks';
+import { usePortfolio } from '../Manager';
 import HoldingsListItem from './HoldingsListItem';
 
 const HoldingsList: React.FC = () => {

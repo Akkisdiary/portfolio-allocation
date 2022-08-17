@@ -1,36 +1,39 @@
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { setUpServer } from '../../api/mock/utils';
-import type { TickerHolding } from '../Manager/types';
 import Manager from '../Manager';
 import TickersList from './HoldingsList';
+
+import type { TickerHolding } from '../Manager';
 
 setUpServer([cleanup]);
 
 const tickers = [
   {
-    url: 'https://www.investing.com/equities/google-inc-company-profile',
-    price: 120.96,
-    exchange: 'Stock - NASDAQ equities',
-    industry: 'Interactive Media & Services',
-    sector: 'Communication Services',
-    market: 'United States',
-    name: 'Alphabet Inc Class A',
-    symbol: 'GOOGL',
+    id: 'NASDAQ:AAPL',
+    symbol: 'AAPL',
+    name: 'Apple Inc.',
+    price: 173.14,
+    sector: 'Electronic Technology',
+    industry: 'Telecommunications Equipment',
+    currency: 'USD',
+    exchange: 'NASDAQ',
     country: 'United States',
-    quantity: '200',
+    // url: 'https://www.tradingview.com/symbols/AAPL/',
+    quantity: '1',
   },
   {
-    url: 'https://www.investing.com/equities/amazon-com-inc-company-profile',
-    price: 143.84,
-    exchange: 'Stock - NASDAQ equities',
-    industry: 'Internet & Direct Marketing Retail',
-    sector: 'Consumer Discretionary',
-    market: 'United States',
-    name: 'Amazon.com Inc',
-    symbol: 'AMZN',
+    id: 'NASDAQ:GOOG',
+    symbol: 'GOOG',
+    name: 'Alphabet Inc.',
+    price: 122.72,
+    sector: 'Technology Services',
+    industry: 'Internet Software/Services',
+    currency: 'USD',
+    exchange: 'NASDAQ',
     country: 'United States',
-    quantity: '120',
+    // url: 'https://www.tradingview.com/symbols/GOOG/',
+    quantity: '1',
   },
 ];
 

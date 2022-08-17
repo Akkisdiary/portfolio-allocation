@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
-import { usePortfolio } from '../Manager/hooks';
+import { usePortfolio } from '../Manager';
 import { generateDoughNutChartData } from './utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -17,11 +17,12 @@ const Chart: React.FC = () => {
       data={chartData}
       options={{
         responsive: true,
-        // maintainAspectRatio: false,
+        maintainAspectRatio: false,
         radius: 160,
         plugins: { legend: { position: 'bottom' } },
         layout: { padding: 10 },
       }}
+      data-testid="chart-canvas"
     />
   );
 };

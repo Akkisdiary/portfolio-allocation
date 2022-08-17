@@ -1,12 +1,13 @@
+import './styles.css';
+
 import React from 'react';
 
-import Manager from './Manager';
-import Search from './Search';
-import HoldingsList from './HoldingsList';
-import Chart from './Chart';
 import CategorySelection from './CategorySelection';
+import Chart from './Chart';
+import HoldingsList from './HoldingsList';
+import Manager from './Manager';
 import MetricSelection from './MetricSelection';
-import './styles.css';
+import Search from './Search';
 
 const Portfolio: React.FC = () => {
   return (

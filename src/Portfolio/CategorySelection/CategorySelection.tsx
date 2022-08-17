@@ -1,7 +1,7 @@
 import React from 'react';
 import { SelectableCategory } from '../Manager';
 
-import { usePortfolio } from '../Manager/hooks';
+import { usePortfolio } from '../Manager';
 
 const CategorySelection: React.FC = () => {
   const { selectableCategories, selectedCategory, updateSelectedCategory } = usePortfolio();

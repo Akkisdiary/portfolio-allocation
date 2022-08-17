@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 
 import PortfolioCtx, { DEFAULT_SELECTED_CATEGORY, SELECTABLE_CATEGORIES } from './context';
+import { Metric } from './enums';
 
-import type { Ticker } from '../../api';
-import { Metric, SelectableCategory, TickerHolding } from './types';
+import type { TickerDetail } from '../../api';
+import type { SelectableCategory, TickerHolding } from './types';
 
 const Manager: React.FC<{
   initialData?: TickerHolding[];
@@ -26,7 +27,7 @@ const Manager: React.FC<{
     setTickers(updated);
   };
 
-  const addTicker = (tik: Ticker) => {
+  const addTicker = (tik: TickerDetail) => {
     const newTik: TickerHolding = { ...tik, quantity: '1' };
     setTickers([...tickers, newTik]);
   };
