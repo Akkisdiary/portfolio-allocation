@@ -43,6 +43,7 @@ const Search: React.FC = (_) => {
   const clearSuggs = () => setSuggs([]);
   const fetchSuggs = ({ value: newValue }: Autosuggest.SuggestionsFetchRequestedParams) => {
     if (newValue) {
+      setValue(newValue);
       TickerApi.search(newValue).then((d) => {
         setSuggs(d);
       });
