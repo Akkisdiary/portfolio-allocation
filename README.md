@@ -4,13 +4,11 @@
 
 Web app that allows users to visualize their stock portfolio by sectors, industries or countries.
 
-## Run This Project
-
-### Live Preview
+## Live Preview
 
 You can access the live demo [here](http://portfolio-by-sector.herokuapp.com/).
 
-### Run Locally
+## Run Locally
 
 1. Start Stocks Scraper Api Server
 
