@@ -8,7 +8,7 @@ Web app that allows users to visualize their stock portfolio by sectors, industr
 
 ### Live Preview
 
-You can access the live demo [here](https://akkisdiary.github.io/portfolio-by-sector).
+You can access the live demo [here](http://portfolio-by-sector.herokuapp.com/).
 
 ### Run Locally
 
