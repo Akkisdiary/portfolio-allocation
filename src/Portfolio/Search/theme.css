@@ -1,0 +1,12 @@
+.react-autosuggest__suggestion {
+  z-index: 40;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.25rem 1rem 0.25rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(100 116 139 / var(--tw-text-opacity));
+}

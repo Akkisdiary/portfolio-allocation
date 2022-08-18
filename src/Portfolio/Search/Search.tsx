@@ -1,3 +1,6 @@
+// import './theme.css';
+
+import cx from 'classnames';
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 
@@ -17,7 +20,10 @@ const SearchInput: React.FC<Autosuggest.RenderInputComponentProps> = ({ classNam
     </span>
     <input
       type="search"
-      className="translate-colors w-full rounded-md border bg-slate-100 py-2 pl-10 text-sm text-slate-700 placeholder-slate-500 shadow-sm transition hover:border-slate-500 focus:rounded-b-none focus:border-slate-500 focus:bg-white focus:shadow-md focus:outline-none"
+      className={cx(
+        'w-full rounded-md border bg-slate-100 py-2 pl-10 text-sm text-slate-700 placeholder-slate-500 shadow-sm transition hover:border-slate-500  focus:border-slate-500  focus:bg-white focus:shadow-md focus:outline-none',
+        className
+      )}
       autoComplete="off"
       {...props}
     />
