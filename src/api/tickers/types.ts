@@ -10,3 +10,15 @@ export interface TickerDetail {
   country: string;
   // url: string;
 }
+
+export type Currency = {
+  name: string;
+  code: string;
+};
+
+export interface CurrencyConversionRate {
+  id: string;
+  from: Currency;
+  to: Currency;
+  rate: number;
+}

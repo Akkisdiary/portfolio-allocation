@@ -8,3 +8,7 @@ export type SelectableCategory = Exclude<
   keyof TickerHolding,
   'id' | 'name' | 'symbol' | 'price' | 'quantity'
 >;
+
+export type CurrencyRates = {
+  [key: string]: number;
+};

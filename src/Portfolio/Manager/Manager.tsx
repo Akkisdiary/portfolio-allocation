@@ -1,10 +1,15 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 
-import PortfolioCtx, { DEFAULT_SELECTED_CATEGORY, SELECTABLE_CATEGORIES } from './context';
+import TickerApi, { CurrencyConversionRate } from '../../api';
+import PortfolioCtx, {
+  DEFAULT_SELECTED_CATEGORY,
+  DEFAULT_SELECTED_CURRENCY,
+  SELECTABLE_CATEGORIES,
+} from './context';
 import { Metric } from './enums';
 
 import type { TickerDetail } from '../../api';
-import type { SelectableCategory, TickerHolding } from './types';
+import type { CurrencyRates, SelectableCategory, TickerHolding } from './types';
 
 const Manager: React.FC<{
   initialData?: TickerHolding[];
@@ -15,6 +20,16 @@ const Manager: React.FC<{
   const [selectedCategory, setSelectedCategory] =
     useState<SelectableCategory>(DEFAULT_SELECTED_CATEGORY);
   const [metric, setMetric] = useState(Metric.PERCENTAGE);
+  const [currencyConversionData, setCurrencyConversionData] = useState<CurrencyConversionRate[]>(
+    []
+  );
+  const [selectedCurrency, setSelectedCurrency] = useState(DEFAULT_SELECTED_CURRENCY);
+
+  useEffect(() => {
+    if (!currencyRates.length) {
+      TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
+    }
+  }, []);
 
   const updateTicker = (symbol: string, newValue: TickerHolding) => {
     const updated = tickers.map((tik) => {
@@ -43,12 +58,45 @@ const Manager: React.FC<{
 
   const updateSelectedCategory = (cat: SelectableCategory) => setSelectedCategory(cat);
 
+  const selectableCurrencies: string[] = useMemo(() => {
+    const _selectableCurrencies = new Set<string>();
+
+    for (const converstionData of currencyConversionData) {
+      const {
+        to: { code: toCode },
+      } = converstionData;
+
+      _selectableCurrencies.add(toCode);
+    }
+
+    return Array.from(_selectableCurrencies);
+  }, [currencyConversionData]);
+
+  const currencyRates: CurrencyRates = useMemo(() => {
+    const _currencyRates: CurrencyRates = {};
+
+    for (const converstionData of currencyConversionData) {
+      const {
+        from: { code: fromCode },
+        to: { code: toCode },
+        rate,
+      } = converstionData;
+
+      _currencyRates[`${fromCode.toLowerCase()}-${toCode.toLowerCase()}`] = rate;
+    }
+
+    return _currencyRates;
+  }, [currencyConversionData]);
+
   return (
     <PortfolioCtx.Provider
       value={{
         tickers,
         selectableCategories,
         selectedCategory,
+        selectableCurrencies: selectableCurrencies,
+        selectedCurrency,
+        currencyRates,
         metric,
         setMetric,
         updateTicker,
@@ -56,6 +104,7 @@ const Manager: React.FC<{
         availableTickers,
         removeTicker,
         updateSelectedCategory,
+        setSelectedCurrency,
       }}
     >
       {children}

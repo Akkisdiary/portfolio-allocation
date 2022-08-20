@@ -29,3 +29,35 @@ describe('Tickers.search()', () => {
     ]);
   });
 });
+
+describe('Tickers.currencyRates', () => {
+  it('should return conversion rates', async () => {
+    const stocks = await Tickers.currencyRates('usd');
+    expect(stocks).toStrictEqual([
+      {
+        id: '1',
+        from: {
+          name: 'U.S. DOLLAR',
+          code: 'USD',
+        },
+        to: {
+          name: 'INDIAN RUPEE',
+          code: 'INR',
+        },
+        rate: 79.91,
+      },
+      {
+        id: '2',
+        from: {
+          name: 'INDIAN RUPEE',
+          code: 'INR',
+        },
+        to: {
+          name: 'U.S. DOLLAR',
+          code: 'USD',
+        },
+        rate: 0.012509,
+      },
+    ]);
+  });
+});

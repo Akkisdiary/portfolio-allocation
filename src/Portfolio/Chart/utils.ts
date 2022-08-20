@@ -1,7 +1,8 @@
 import { Metric } from '../Manager';
 
 import type { ChartData } from 'chart.js';
-import type { SelectableCategory, TickerHolding } from '../Manager';
+import type { SelectableCategory, TickerHolding, CurrencyRates } from '../Manager';
+import { DEFAULT_SELECTED_CURRENCY } from '../Manager/context';
 
 const colors = [
   '#f87171',
@@ -22,18 +23,33 @@ const colors = [
 export const generateDoughNutChartData = (
   data: TickerHolding[],
   key: SelectableCategory,
-  metric: Metric
+  metric: Metric,
+  currencyRates: CurrencyRates,
+  currencyIn: string
 ): ChartData<'doughnut'> => {
   const memo: {
     [key: string]: number;
   } = {};
 
   for (const tik of data) {
+    const tikCurrency = tik.currency;
     const quantity = tik.quantity ? parseInt(tik.quantity) : 0;
 
-    const name = tik[key];
-    const value = tik.price * quantity;
+    let value = tik.price * quantity;
 
+    if (tikCurrency.toLowerCase() !== DEFAULT_SELECTED_CURRENCY.toLowerCase()) {
+      const defaultRate =
+        currencyRates[`${tikCurrency.toLowerCase()}-${DEFAULT_SELECTED_CURRENCY.toLowerCase()}`];
+      value = value * defaultRate;
+    }
+
+    if (DEFAULT_SELECTED_CURRENCY.toLowerCase() !== currencyIn.toLowerCase()) {
+      const conversionRate =
+        currencyRates[`${DEFAULT_SELECTED_CURRENCY.toLowerCase()}-${currencyIn.toLowerCase()}`];
+      value = value * conversionRate;
+    }
+
+    const name = tik[key];
     memo[name] = memo[name] ? memo[name] + value : value;
   }
 

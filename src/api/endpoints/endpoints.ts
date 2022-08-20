@@ -3,8 +3,8 @@ import { QueryParams } from './types';
 const HOST = process.env.REACT_APP_REMOTE;
 
 export const Endpoints = {
-  TickerSearch: (query: string) => Url("/search", { query: query }),
-  TickerDetail: (url: string) => Url("/detail", { url: url }),
+  TickerSearch: (query: string) => Url('/search', { query: query }),
+  CureencyRates: (code: string) => Url(`/currency/${code}`, {}),
 };
 
 export const Url = (path: string, params: QueryParams) => {

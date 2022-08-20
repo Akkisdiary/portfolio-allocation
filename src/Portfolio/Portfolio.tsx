@@ -2,11 +2,12 @@ import './styles.css';
 
 import React from 'react';
 
-import CategorySelection from './CategorySelection';
 import Chart from './Chart';
 import HoldingsList from './HoldingsList';
 import Manager from './Manager';
 import MetricSelection from './MetricSelection';
+import CategorySelection from './CategorySelection';
+import CurrencySelection from './CurrencySelection';
 import Search from './Search';
 
 const Portfolio: React.FC = () => {
@@ -21,9 +22,10 @@ const Portfolio: React.FC = () => {
           </div>
           <HoldingsList />
         </div>
-        <div className="h-full min-h-screen" data-testid="graph-section">
-          <div className="sticky top-0 h-full p-2">
+        <div className="relative h-full min-h-screen" data-testid="graph-section">
+          <div className="sticky top-0 h-full max-h-screen p-2">
             <div className="absolute right-2 top-2 mt-4 mr-4 flex gap-2">
+              <CurrencySelection />
               <MetricSelection />
               <CategorySelection />
             </div>

@@ -1,22 +1,14 @@
 import { Endpoints } from '../endpoints/endpoints';
-import type { TickerDetail } from './types';
+import type { TickerDetail, CurrencyConversionRate } from './types';
 
 interface SearchResponse {
   results: TickerDetail[];
   status_code: number;
 }
 
-interface DetailResponse {
-  url: string;
-  name: string;
-  symbol: string;
-  exchange: string;
-  price: number;
-  industry: string;
-  sector: string;
-  market: string;
-  country: string;
-  // status_code: string;
+interface CurrencyRatesResponse {
+  data: CurrencyConversionRate[];
+  status_code: string;
 }
 
 export const search = async (query: string): Promise<TickerDetail[]> => {
@@ -30,12 +22,13 @@ export const search = async (query: string): Promise<TickerDetail[]> => {
   return data.results;
 };
 
-export const detail = async (url: string): Promise<unknown> => {
-  const ep = Endpoints.TickerDetail(url);
+export const currencyRates = async (code: string): Promise<CurrencyConversionRate[]> => {
+  const ep = Endpoints.CureencyRates(code);
 
   const res = await fetch(ep, {
     headers: { accept: 'application/json' },
   });
 
-  return await res.json();
+  const data: CurrencyRatesResponse = await res.json();
+  return data.data;
 };

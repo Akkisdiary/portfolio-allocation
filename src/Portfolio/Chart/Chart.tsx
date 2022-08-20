@@ -8,9 +8,16 @@ import { generateDoughNutChartData } from './utils';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart: React.FC = () => {
-  const { availableTickers, selectedCategory, metric } = usePortfolio();
+  const { availableTickers, selectedCategory, currencyRates, selectedCurrency, metric } =
+    usePortfolio();
 
-  const chartData = generateDoughNutChartData(availableTickers(), selectedCategory, metric);
+  const chartData = generateDoughNutChartData(
+    availableTickers(),
+    selectedCategory,
+    metric,
+    currencyRates,
+    selectedCurrency
+  );
 
   return (
     <Doughnut
