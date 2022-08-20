@@ -54,7 +54,7 @@ describe('<HoldingsList />', () => {
 
   it('should show call to action message if no stocks are added to portfolio', () => {
     renderTickersList([]);
-    const msg = screen.getByText(/search stocks to add them here/i);
+    const msg = screen.getByText(/search stocks to add/i);
     expect(msg).toBeVisible();
   });
 });

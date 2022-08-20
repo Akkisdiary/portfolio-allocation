@@ -24,7 +24,7 @@ const HoldingsList: React.FC = () => {
         tickers.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
       ) : (
         <div className="col-span-6 w-full py-4 text-center text-sm text-slate-500">
-          <p>Search stocks to add them here</p>
+          <p>Search stocks to add them to your holdings</p>
         </div>
       )}
     </div>

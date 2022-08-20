@@ -78,6 +78,7 @@ export const generateDoughNutChartData = (
       {
         data: values,
         backgroundColor: bgColors,
+        borderWidth: 1,
       },
     ],
   };

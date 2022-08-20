@@ -11,13 +11,26 @@ const Chart: React.FC = () => {
   const { availableTickers, selectedCategory, currencyRates, selectedCurrency, metric } =
     usePortfolio();
 
-  const chartData = generateDoughNutChartData(
+  let chartData = generateDoughNutChartData(
     availableTickers(),
     selectedCategory,
     metric,
     currencyRates,
     selectedCurrency
   );
+
+  if (
+    chartData.datasets.length == 0 ||
+    !chartData.datasets[0].data ||
+    chartData.datasets[0].data.length == 0
+  ) {
+    chartData = {
+      labels: ['Search Stocks'],
+      datasets: [
+        { data: [1], backgroundColor: ['#64748b33'], borderColor: ['#64748bB2'], borderWidth: 1 },
+      ],
+    };
+  }
 
   return (
     <Doughnut
