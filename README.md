@@ -3,6 +3,8 @@
 Visualize your stock protfolio by sector, industry, currency & country. Add stock tickers from global stock exchanges with live prices.
 Built Using [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
+![app screenshot](/assets/Screenshot.png "App Screenshot")
+
 ## Live Preview
 
 You can access the live demo [here](https://portfolio-allocation.netlify.app/).
