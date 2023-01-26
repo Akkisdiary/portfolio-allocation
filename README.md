@@ -1,4 +1,4 @@
-# Portfolio by Sector
+# Portfolio Allocation
 
 Visualize your stock protfolio by sector, industry, currency & country. Add stock tickers from global stock exchanges with live prices.
 Built Using [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
