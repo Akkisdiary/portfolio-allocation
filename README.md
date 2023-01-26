@@ -5,7 +5,7 @@ Built Using [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss
 
 ## Live Preview
 
-You can access the live demo [here](http://portfolio-by-sector.herokuapp.com/).
+You can access the live demo [here](https://portfolio-allocation.netlify.app/).
 
 ## Run Locally
 
