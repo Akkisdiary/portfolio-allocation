@@ -11,4 +11,6 @@ const Text: React.FC<{ size?: 'sm' | 'md' | 'lg' }> = ({ size = 'md' }) => (
   ></div>
 );
 
-export default { Text };
+const Skeleton = { Text }
+
+export default Skeleton;
