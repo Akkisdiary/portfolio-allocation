@@ -35,7 +35,7 @@ export const DeleteButton: React.FC<IButtonProps> = ({ children, className, isLo
       data-testid="delete-btn"
       {...props}
     >
-      <TrashIcon />$nbsp;
+      <TrashIcon />
       {isLoading ? <Spinner /> : children}
     </button>
   );
