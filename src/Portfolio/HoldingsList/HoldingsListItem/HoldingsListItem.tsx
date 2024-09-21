@@ -25,7 +25,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
 
   return (
     <div
-      className="grid grid-cols-8 items-center gap-2 px-4 py-2 text-sm"
+      className="grid grid-cols-7 items-center gap-2 px-4 py-2 text-sm"
       data-testid="holdings-list-item"
     >
       <div className="col-span-2">
@@ -36,7 +36,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
       <div className="col-span-1 text-end">{ticker.currency}
       </div>
       <div className="col-span-1 font-medium">{ticker.price}</div>
-      <div className="col-span-2 inline-flex items-center gap-1">
+      <div className="col-span-1 inline-flex items-center gap-1">
         <Input
           type="number"
           min={1}
