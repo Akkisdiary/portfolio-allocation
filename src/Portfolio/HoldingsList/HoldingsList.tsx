@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button } from '../../components';
+import { LitUpButton } from '../../components';
 import TickerApi from '../../api';
 import { usePortfolio } from '../Manager';
 import HoldingsListItem from './HoldingsListItem';
@@ -43,7 +43,7 @@ const HoldingsList: React.FC = () => {
             <div className='mb-2'>
               <p>Search stocks to add them to your holdings, or</p>
             </div>
-            <Button onClick={fetchRandomTickers} isLoading={isLoading}>Randomize</Button>
+            <LitUpButton onClick={fetchRandomTickers} isLoading={isLoading}>Randomize</LitUpButton>
           </div>
         </>
       )}

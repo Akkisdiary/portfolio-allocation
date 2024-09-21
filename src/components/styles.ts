@@ -1,0 +1,1 @@
+export const ButtonStyles = "inline-flex items-center px-2 py-1 rounded-md border font-semibold leading-6 shadow-sm hover:shadow-md text-slate-700 bg-slate-100 hover:bg-slate-200 hover:border-slate-500 transition ease-in-out duration-150";

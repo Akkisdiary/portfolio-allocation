@@ -90,7 +90,6 @@ const Manager: React.FC<{
   }, [currencyConversionData]);
 
   useEffect(() => {
-    console.log(currencyRates.length, !currencyRates.length)
     if (!currencyRates.length) {
       TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
     }

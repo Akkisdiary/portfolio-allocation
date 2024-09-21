@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, DeleteBtn } from '../../../components';
+import { Input, DeleteButton } from '../../../components';
 import { usePortfolio } from '../../Manager';
 
 import type { TickerHolding } from '../../Manager';
@@ -43,7 +43,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
           onChange={updateQuantity}
           className="max-w-[4rem] py-1 pl-2 pr-1"
         />
-        <DeleteBtn onClick={handleRemoveTicker} />
+        <DeleteButton onClick={handleRemoveTicker} />
       </div>
     </div>
   );
