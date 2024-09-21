@@ -20,9 +20,9 @@ const Chart: React.FC = () => {
   );
 
   if (
-    chartData.datasets.length == 0 ||
+    chartData.datasets.length === 0 ||
     !chartData.datasets[0].data ||
-    chartData.datasets[0].data.length == 0
+    chartData.datasets[0].data.length === 0
   ) {
     chartData = {
       labels: ['Search Stocks'],
