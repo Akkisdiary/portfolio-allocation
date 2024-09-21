@@ -1,6 +1,6 @@
 import cx from 'classnames';
 
-import { loader } from './utils';
+import { Spinner } from '../';
 
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
@@ -17,7 +17,7 @@ const Button: React.FC<IButtonProps> = ({ children, className, isLoading = false
       {...props}
     >
 
-      {isLoading ? loader : children}
+      {isLoading ? <Spinner /> : children}
     </button>
   );
 };
