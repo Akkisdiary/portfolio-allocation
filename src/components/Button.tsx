@@ -1,6 +1,6 @@
 import cx from 'classnames';
 
-import { Spinner } from '../';
+import { Spinner } from '.';
 
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;

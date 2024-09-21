@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { TrashIcon } from '../Icons';
+import { TrashIcon } from './Icons';
 
 interface IButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
