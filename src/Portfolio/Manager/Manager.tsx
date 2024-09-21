@@ -25,12 +25,6 @@ const Manager: React.FC<{
   );
   const [selectedCurrency, setSelectedCurrency] = useState(DEFAULT_SELECTED_CURRENCY);
 
-  useEffect(() => {
-    if (!currencyRates.length) {
-      TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
-    }
-  }, []);
-
   const updateTicker = (symbol: string, newValue: TickerHolding) => {
     const updated = tickers.map((tik) => {
       if (tik.symbol === symbol) {
@@ -87,6 +81,12 @@ const Manager: React.FC<{
 
     return _currencyRates;
   }, [currencyConversionData]);
+
+  useEffect(() => {
+    if (!currencyRates.length) {
+      TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
+    }
+  }, [currencyRates]);
 
   return (
     <PortfolioCtx.Provider
