@@ -1,6 +1,5 @@
 import './theme.css';
 
-import cx from 'classnames';
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 
