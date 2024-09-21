@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { DeleteBtn, Skeleton } from '../../../components';
+import { DeleteBtn } from '../../../components';
 import Input from '../../../components/Input';
 import { usePortfolio } from '../../Manager';
 
@@ -12,7 +12,6 @@ interface ITickersListItemProps {
 
 const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
   const { updateTicker, removeTicker, selectedCategory } = usePortfolio();
-  const [isLoading, setIsLoading] = useState(false);
 
   const updateQuantity = (e: React.FormEvent<HTMLInputElement>) => {
     const updatedValue = {
@@ -33,13 +32,10 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
         <h3 className="font-bold">{ticker.symbol}</h3>
         <p className="text-sm text-slate-500">{ticker.name}</p>
       </div>
-      <div className="col-span-2">{isLoading ? <Skeleton.Text /> : ticker[selectedCategory]}</div>
-      <div className="col-span-1 text-end">
-        {isLoading ? <Skeleton.Text size="sm" /> : ticker.currency}
+      <div className="col-span-2">{ticker[selectedCategory]}</div>
+      <div className="col-span-1 text-end">{ticker.currency}
       </div>
-      <div className="col-span-1 font-medium">
-        {isLoading ? <Skeleton.Text size="sm" /> : ticker.price}
-      </div>
+      <div className="col-span-1 font-medium">{ticker.price}</div>
       <div className="col-span-2 inline-flex items-center gap-1">
         <Input
           type="number"
