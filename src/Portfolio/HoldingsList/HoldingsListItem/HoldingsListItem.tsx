@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { DeleteBtn } from '../../../components';
-import Input from '../../../components/Input';
+import { Input, DeleteBtn } from '../../../components';
 import { usePortfolio } from '../../Manager';
 
 import type { TickerHolding } from '../../Manager';

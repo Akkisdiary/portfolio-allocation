@@ -1,7 +1,4 @@
-export { default as Screen } from './Screen';
-export { default as Input } from './Input';
-export { default as Button } from './Button';
-export { default as DeleteBtn } from './DeleteBtn';
-export { default as Select } from './Select';
-export { default as Skeleton } from './Skeleton';
+export * from './Screens';
+export * from './Inputs';
+export * from './Buttons';
 export * from './Icons';
