@@ -11,14 +11,14 @@ const HoldingsList: React.FC = () => {
       className="rounded-md border border-slate-200 bg-white text-slate-800"
       data-testid="holdings-list"
     >
-      <div className="grid w-full grid-cols-8 border border-transparent border-b-slate-200 px-4 py-2 font-bold">
+      <div className="grid w-full grid-cols-7 gap-2 border border-transparent border-b-slate-200 px-4 py-2 font-bold">
         <div className="col-span-2">Name</div>
         <div className="col-span-2">
           <span className="capitalize">{selectedCategory}</span>
         </div>
         <div className="col-span-1"></div>
         <div className="col-span-1">CMP</div>
-        <div className="col-span-2">Qty</div>
+        <div className="col-span-1">Qty</div>
       </div>
       {tickers.length ? (
         tickers.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
