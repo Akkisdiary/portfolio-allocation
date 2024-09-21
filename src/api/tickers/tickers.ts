@@ -22,6 +22,17 @@ export const search = async (query: string): Promise<TickerDetail[]> => {
   return data.results;
 };
 
+export const searchRandom = async (limit: number): Promise<TickerDetail[]> => {
+  const ep = Endpoints.TickerSearchRandom(String(limit || 10));
+
+  const res = await fetch(ep, {
+    headers: { accept: 'application/json' },
+  });
+
+  const data: SearchResponse = await res.json();
+  return data.results;
+};
+
 export const currencyRates = async (code: string): Promise<CurrencyConversionRate[]> => {
   const ep = Endpoints.CureencyRates(code);
 

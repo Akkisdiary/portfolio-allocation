@@ -4,6 +4,7 @@ const HOST = process.env.REACT_APP_REMOTE;
 
 export const Endpoints = {
   TickerSearch: (query: string) => Url('/search', { query: query }),
+  TickerSearchRandom: (limit: string) => Url('/search/random', { limit }),
   CureencyRates: (code: string) => Url(`/currency/${code}`, {}),
 };
 

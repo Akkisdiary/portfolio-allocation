@@ -20,6 +20,7 @@ export interface IPortfolioCtx {
   setMetric: (m: Metric) => void;
   updateTicker: (symbol: string, newValue: TickerHolding) => void;
   addTicker: (tik: TickerDetail) => void;
+  addTickers: (tik: TickerDetail[]) => void;
   availableTickers: () => TickerHolding[];
   removeTicker: (symbolToRemove: string) => void;
   updateSelectedCategory: (cat: SelectableCategory) => void;
@@ -37,6 +38,7 @@ const PortfolioCtx = createContext<IPortfolioCtx>({
   setMetric: () => {},
   updateTicker: () => {},
   addTicker: () => {},
+  addTickers: () => {},
   availableTickers: () => [],
   removeTicker: () => {},
   updateSelectedCategory: () => {},

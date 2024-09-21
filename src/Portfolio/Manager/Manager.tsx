@@ -41,6 +41,13 @@ const Manager: React.FC<{
     setTickers([...tickers, newTik]);
   };
 
+  const addTickers = (tiks: TickerDetail[]) => {
+    const newTiks: TickerHolding[] = tiks.map(t => {
+      return {quantity: '1', ...t}
+    });
+    setTickers([...tickers, ...newTiks]);
+  };
+
   const availableTickers = useCallback(() => {
     return tickers.filter((tik) => !!tik.sector);
   }, [tickers]);
@@ -101,6 +108,7 @@ const Manager: React.FC<{
         setMetric,
         updateTicker,
         addTicker,
+        addTickers,
         availableTickers,
         removeTicker,
         updateSelectedCategory,

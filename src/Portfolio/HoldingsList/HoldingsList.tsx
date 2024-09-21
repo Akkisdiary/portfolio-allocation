@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import { Button } from '../../components';
+import TickerApi from '../../api';
 import { usePortfolio } from '../Manager';
 import HoldingsListItem from './HoldingsListItem';
 
+const randomInteger = (limit: number) => Math.floor(Math.random() * limit)
+
 const HoldingsList: React.FC = () => {
-  const { tickers, selectedCategory } = usePortfolio();
+  const { tickers, selectedCategory, addTickers } = usePortfolio();
+  const [isLoading, setIsLoading] = useState(false)
+
+  const fetchRandomTickers = async () => {
+    setIsLoading(true);
+    const tickers = await TickerApi.searchRandom(10)
+    const randomTickers = tickers.map(t => {
+      return { ...t, quantity: String(randomInteger(100))}
+    })
+    addTickers(randomTickers)
+    setIsLoading(false);
+  };
 
   return (
     <div
@@ -23,9 +38,14 @@ const HoldingsList: React.FC = () => {
       {tickers.length ? (
         tickers.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
       ) : (
-        <div className="col-span-6 w-full py-4 text-center text-sm text-slate-500">
-          <p>Search stocks to add them to your holdings</p>
-        </div>
+        <>
+          <div className="col-span-6 w-full py-4 text-center text-sm text-slate-500">
+            <div className='mb-2'>
+              <p>Search stocks to add them to your holdings, or</p>
+            </div>
+            <Button onClick={fetchRandomTickers} isLoading={isLoading}>Randomize</Button>
+          </div>
+        </>
       )}
     </div>
   );
