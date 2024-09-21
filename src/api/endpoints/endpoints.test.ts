@@ -18,7 +18,7 @@ describe('Endpoints()', () => {
   });
 
   it('should return currency rates url', () => {
-    const url = Endpoints.CureencyRates('inr');
+    const url = Endpoints.CurrencyRates('inr');
     expect(url).toBe('http://test.com/currency/inr');
   });
 });

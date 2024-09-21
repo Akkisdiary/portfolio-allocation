@@ -62,10 +62,10 @@ const Manager: React.FC<{
   const selectableCurrencies: string[] = useMemo(() => {
     const _selectableCurrencies = new Set<string>();
 
-    for (const converstionData of currencyConversionData) {
+    for (const conversionData of currencyConversionData) {
       const {
         to: { code: toCode },
-      } = converstionData;
+      } = conversionData;
 
       _selectableCurrencies.add(toCode);
     }
@@ -76,12 +76,12 @@ const Manager: React.FC<{
   const currencyRates: CurrencyRates = useMemo(() => {
     const _currencyRates: CurrencyRates = {};
 
-    for (const converstionData of currencyConversionData) {
+    for (const conversionData of currencyConversionData) {
       const {
         from: { code: fromCode },
         to: { code: toCode },
         rate,
-      } = converstionData;
+      } = conversionData;
 
       _currencyRates[`${fromCode.toLowerCase()}-${toCode.toLowerCase()}`] = rate;
     }
@@ -90,10 +90,11 @@ const Manager: React.FC<{
   }, [currencyConversionData]);
 
   useEffect(() => {
+    console.log(currencyRates.length, !currencyRates.length)
     if (!currencyRates.length) {
       TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
     }
-  }, [currencyRates]);
+  }, []);
 
   return (
     <PortfolioCtx.Provider
@@ -101,7 +102,7 @@ const Manager: React.FC<{
         tickers,
         selectableCategories,
         selectedCategory,
-        selectableCurrencies: selectableCurrencies,
+        selectableCurrencies,
         selectedCurrency,
         currencyRates,
         metric,

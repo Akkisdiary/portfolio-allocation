@@ -34,7 +34,7 @@ export const searchRandom = async (limit: number): Promise<TickerDetail[]> => {
 };
 
 export const currencyRates = async (code: string): Promise<CurrencyConversionRate[]> => {
-  const ep = Endpoints.CureencyRates(code);
+  const ep = Endpoints.CurrencyRates(code);
 
   const res = await fetch(ep, {
     headers: { accept: 'application/json' },
