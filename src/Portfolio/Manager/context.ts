@@ -7,7 +7,7 @@ import type { TickerHolding, SelectableCategory, CurrencyRates } from './types';
 
 export const SELECTABLE_CATEGORIES: SelectableCategory[] = ['sector', 'industry', 'country'];
 export const DEFAULT_SELECTED_CATEGORY: SelectableCategory = 'sector';
-export const DEFAULT_SELECTED_CURRENCY = 'usd';
+export const DEFAULT_SELECTED_CURRENCY = 'inr';
 
 export interface IPortfolioCtx {
   tickers: TickerHolding[];
