@@ -32,13 +32,20 @@ const Chart: React.FC = () => {
     };
   }
 
+  const { innerWidth } = window
+
+  let chartRadius = 160
+  if (innerWidth <= 640) {
+    chartRadius = 120
+  }
+
   return (
     <Doughnut
       data={chartData}
       options={{
         responsive: true,
         maintainAspectRatio: false,
-        radius: 160,
+        radius: chartRadius,
         plugins: { legend: { position: 'bottom' } },
         layout: { padding: 10 },
       }}

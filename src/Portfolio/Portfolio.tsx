@@ -28,7 +28,7 @@ const Portfolio: React.FC = () => {
           <HoldingsList />
         </div>
         <div
-          className="relative order-2 h-full max-h-[70vh] min-h-[70vh] sm:max-h-[90vh] sm:min-h-[90vh]"
+          className="relative order-2 h-full max-h-[50vh] min-h-[50vh] sm:max-h-[90vh] sm:min-h-[90vh]"
           data-testid="graph-section"
         >
           <div className="top-0 h-full sm:sticky sm:max-h-screen">

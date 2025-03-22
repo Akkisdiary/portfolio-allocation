@@ -24,24 +24,22 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
 
   return (
     <div
-      className="grid grid-cols-7 items-center gap-2 px-4 py-2 text-sm"
+      className="grid grid-cols-7 items-center gap-2 p-2 text-sm"
       data-testid="holdings-list-item"
     >
       <div className="col-span-2">
-        <h3 className="font-bold">{ticker.symbol}</h3>
-        <p className="text-sm text-slate-500">{ticker.name}</p>
+        <h3 className="font-bold truncate">{ticker.symbol}</h3>
+        <p className="text-sm text-slate-500 truncate">{ticker.name}</p>
       </div>
-      <div className="col-span-2">{ticker[selectedCategory]}</div>
-      <div className="col-span-1 text-end">{ticker.currency}
-      </div>
+      <div className="col-span-2 truncate">{ticker[selectedCategory]}</div>
       <div className="col-span-1 font-medium">{ticker.price}</div>
-      <div className="col-span-1 inline-flex items-center gap-1">
+      <div className="col-span-2 inline-flex items-center gap-1">
         <Input
           type="number"
           min={1}
           value={ticker.quantity}
           onChange={updateQuantity}
-          className="max-w-[4rem] py-1 pl-2 pr-1"
+          className="py-1 pl-2 pr-1"
         />
         <DeleteButton onClick={handleRemoveTicker} />
       </div>
