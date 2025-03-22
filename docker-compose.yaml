@@ -15,14 +15,14 @@ services:
       context: .
       args:
         REACT_APP_API_ORIGIN: "http://localhost:8000"
-    # command: ["npm", "start"]
+    command: ["npm", "start"]
     container_name: frontend
     environment:
       REACT_APP_API_ORIGIN: "http://localhost:8000"
-      PORT: "5000"
+      PORT: "8080"
     platform: linux/amd64
     ports:
-     - "8080:5000"
+     - "8080:8080"
     volumes:
       - ".:/usr/src/app"
       - /usr/src/app/node_modules/
