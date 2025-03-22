@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: https://github.com/Akkisdiary/stocks-scraper.git
+      dockerfile: Dockerfile
+      ssh:
+        - default
+    container_name: backend
+    platform: linux/amd64
+    ports:
+     - "8000:5000"
+
+  frontend:
+    build:
+      context: .
+      args:
+        REACT_APP_API_ORIGIN: "http://localhost:8000"
+    # command: ["npm", "start"]
+    container_name: frontend
+    environment:
+      REACT_APP_API_ORIGIN: "http://localhost:8000"
+      PORT: "5000"
+    platform: linux/amd64
+    ports:
+     - "8080:5000"
+    volumes:
+      - ".:/usr/src/app"
+      - /usr/src/app/node_modules/
+      - /usr/src/app/build/
