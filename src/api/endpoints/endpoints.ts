@@ -1,6 +1,6 @@
 import { QueryParams } from './types';
 
-const HOST = process.env.REACT_APP_REMOTE;
+const API_ORIGIN = process.env.REACT_APP_API_ORIGIN;
 
 export const Endpoints = {
   TickerSearch: (query: string) => Url('/search', { query: query }),
@@ -9,7 +9,7 @@ export const Endpoints = {
 };
 
 export const Url = (path: string, params: QueryParams) => {
-  const url = new URL(HOST + path);
+  const url = new URL(API_ORIGIN + path);
   Object.entries(params).forEach(([k, v]) => {
     url.searchParams.set(k, v);
   });

@@ -1,40 +1,21 @@
 # Portfolio Allocation
-
-Visualize your stock protfolio by sector, industry, currency & country. Add stock tickers from global stock exchanges with live prices.
-Built Using [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
+Visualize equity allocations by sector, country, and currency with live global market stock prices. Built Using [React](https://reactjs.org/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ![app screenshot](/assets/Screenshot.png "App Screenshot")
 
 ## Live Preview
-
-You can access the live demo [here](https://portfolio-allocation.netlify.app/).
+Access the live demo [here](https://portfolio-allocation.netlify.app/).
 
 ## Run Locally
+- Start Backend Api Server: [Here](https://github.com/Akkisdiary/stocks-scraper) is a Python Flask back-end which exposes RESTfull endpoints used by this project. Feel free to clone that project and run it locally.  You can modify the `REACT_APP_REMOTE` env variable in `.env.development` file to point to the server.
+- Install Node Dependencies : `npm install`
+- Start Server: `npm start`
 
-1. Start Stocks Scraper Api Server
+OR
 
-   [Here](https://github.com/Akkisdiary/stocks-scraper) is a Python Flask back-end which exposes RESTfull endpoints used by this project. Feel free to clone that project and run it locally.
-
-   > You can always modify the REACT_APP_REMOTE env variable in `.env.development` file to point to the server's hostname and port.
-
-2. Run React App
-
-   Install Dependencies
-
-   ```bash
-   npm install
-   ```
-
-   Start Server
-
-   ```bash
-   npm start
-   ```
+- Run in docker: `docker compose up -d`
 
 ## Test
-
-Run tests
-
 ```bash
 npm run test
 ```
