@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:23.10.0-alpine
 
 ARG REACT_APP_API_ORIGIN
 
