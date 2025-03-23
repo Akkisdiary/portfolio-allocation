@@ -34,12 +34,12 @@ export const searchRandom = async (limit: number): Promise<TickerDetail[]> => {
 };
 
 export const currencyRates = async (code: string): Promise<CurrencyConversionRate[]> => {
-  const ep = Endpoints.CurrencyRates(code);
+  const config = {headers: { accept: 'application/json' }};
+  const f1 = fetch(Endpoints.CurrencyRates("inrusd"), config);
+  const f2 = fetch(Endpoints.CurrencyRates("usdinr"), config);
 
-  const res = await fetch(ep, {
-    headers: { accept: 'application/json' },
-  });
+  const [r1, r2] = await Promise.all([f1, f2]);
+  const [j1, j2]: CurrencyRatesResponse[] = await Promise.all([r1.json(), r2.json()])
 
-  const data: CurrencyRatesResponse = await res.json();
-  return data.data;
+  return [...j1.data, ...j2.data];
 };
