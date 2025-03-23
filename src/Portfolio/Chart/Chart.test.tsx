@@ -9,7 +9,7 @@ afterEach(cleanup);
 describe('<Chart />', () => {
   it('should render chart from ticker data', () => {
     render(
-      <Manager initialData={tickersData}>
+      <Manager>
         <Chart />
       </Manager>
     );

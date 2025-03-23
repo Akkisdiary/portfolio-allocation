@@ -1,141 +1,148 @@
-import { tickersData } from '../../api/mock/data';
-import { Metric } from '../Manager';
-import { generateDoughNutChartData } from './utils';
+import { tickersData } from "../../api/mock/data";
+import { Metric } from "../Manager";
+import { generateDoughNutChartData, priceByExchangeRate } from "./utils";
 
 const holdings = tickersData.map((d) => {
-  return { ...d, quantity: '1' };
+  return { ...d, quantity: 1 };
 });
 
-const currencyRates = {
-  'usd-eur': 0.9958,
-  'usd-inr': 79.91,
-  'inr-usd': 0.012,
+const exchangeRates = {
+  "usd-eur": 0.9958,
+  "usd-inr": 79.91,
+  "inr-usd": 0.012,
 };
 
-describe('generateDoughNutChartData()', () => {
-  it('convert by provided key - sector', () => {
-    const result = generateDoughNutChartData(
-      holdings,
-      'sector',
-      Metric.VALUE,
-      currencyRates,
-      'usd'
-    );
-
-    expect(result).toMatchObject({
-      labels: [
-        'Technology Services',
-        'Retail Trade',
-        'Electronic Technology',
-        'Consumer Durables',
-        'Energy Minerals',
-      ],
-      datasets: [
-        {
-          data: [568.4387, 144.34, 173.14, 927.5, 31.3662],
-        },
-      ],
-    });
+describe("priceByExchangeRate()", () => {
+  it("converts a to a", () => {
+    const rates = {};
+    const result = priceByExchangeRate(100, "USD", "USD", rates);
+    expect(result).toEqual(100);
   });
 
-  it('convert by provided key - industry', () => {
-    const result = generateDoughNutChartData(
-      holdings,
-      'industry',
-      Metric.VALUE,
-      currencyRates,
-      'usd'
-    );
-
-    expect(result).toMatchObject({
-      labels: [
-        'Internet Software/Services',
-        'Internet Retail',
-        'Telecommunications Equipment',
-        'Motor Vehicles',
-        'Oil Refining/Marketing',
-        'Information Technology Services',
-      ],
-      datasets: [
-        {
-          data: [549.2735, 144.34, 173.14, 927.5, 31.3662, 19.1652],
-        },
-      ],
-    });
+  it("converts a to b", () => {
+    const rates = { "usd-inr": 86 };
+    const result = priceByExchangeRate(100, "USD", "INR", rates);
+    expect(result).toEqual(8600);
   });
 
-  it('convert by provided metric - percentage', () => {
-    const result = generateDoughNutChartData(
-      holdings,
-      'sector',
-      Metric.PERCENTAGE,
-      currencyRates,
-      'usd'
-    );
+  it("converts b to a", () => {
+    const rates = { "usd-eur": 1.2 };
+    const result = priceByExchangeRate(120, "EUR", "USD", rates);
+    expect(result).toEqual(100);
+  });
+});
 
-    expect(result).toMatchObject({
-      labels: [
-        'Technology Services',
-        'Retail Trade',
-        'Electronic Technology',
-        'Consumer Durables',
-        'Energy Minerals',
-      ],
+describe("generateDoughNutChartData()", () => {
+  it("convert by provided key", () => {
+    const holdings = [
+      {
+        id: "NASDAQ:META",
+        symbol: "META",
+        name: "Meta Platforms, Inc.",
+        price: 200,
+        sector: "Technology Services",
+        industry: "Internet Software/Services",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 1,
+      },
+      {
+        id: "NASDAQ:AMZN",
+        symbol: "AMZN",
+        name: "Amazon.com, Inc.",
+        price: 140,
+        sector: "Retail Trade",
+        industry: "Internet Retail",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 2,
+      },
+    ];
+    const actual1 = generateDoughNutChartData(holdings, "sector");
+    const expected1 = {
+      labels: ["Technology Services", "Retail Trade"],
       datasets: [
         {
-          data: [30.81, 7.82, 9.39, 50.28, 1.7], // total: 100%
+          data: [200, 280],
         },
       ],
-    });
-  });
+    };
+    expect(actual1).toMatchObject(expected1);
 
-  it('convert to provided currency - INR', () => {
-    const result1 = generateDoughNutChartData(
-      holdings,
-      'sector',
-      Metric.VALUE,
-      currencyRates,
-      'INR'
-    );
-
-    expect(result1).toMatchObject({
-      labels: [
-        'Technology Services',
-        'Retail Trade',
-        'Electronic Technology',
-        'Consumer Durables',
-        'Energy Minerals',
-      ],
+    const actual2 = generateDoughNutChartData(holdings, "industry");
+    const expected2 = {
+      labels: ["Internet Software/Services", "Internet Retail"],
       datasets: [
         {
-          data: [45423.936517, 11534.2094, 13835.6174, 74116.525, 2506.4730419999996],
+          data: [200, 280],
         },
       ],
-    });
+    };
+    expect(actual2).toMatchObject(expected2);
   });
 
-  it('convert to provided currency - EUR', () => {
-    const result = generateDoughNutChartData(
-      holdings,
-      'sector',
-      Metric.VALUE,
-      currencyRates,
-      'EUR'
-    );
-
-    expect(result).toMatchObject({
-      labels: [
-        'Technology Services',
-        'Retail Trade',
-        'Electronic Technology',
-        'Consumer Durables',
-        'Energy Minerals',
-      ],
+  it("aggregates over attribute", () => {});
+    const holdings = [
+      {
+        id: "NASDAQ:META",
+        symbol: "META",
+        name: "Meta Platforms, Inc.",
+        price: 179.3,
+        sector: "Technology Services",
+        industry: "Internet Software/Services",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 1,
+      },
+      {
+        id: "NASDAQ:AMZN",
+        symbol: "AMZN",
+        name: "Amazon.com, Inc.",
+        price: 144.34,
+        sector: "Retail Trade",
+        industry: "Internet Retail",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 1,
+      },
+      {
+        id: "NASDAQ:AAPL",
+        symbol: "AAPL",
+        name: "Apple Inc.",
+        price: 173.14,
+        sector: "Retail Trade",
+        industry: "Telecommunications Equipment",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 1,
+      },
+      {
+        id: "NASDAQ:GOOG",
+        symbol: "GOOG",
+        name: "Alphabet Inc.",
+        price: 122.72,
+        sector: "Technology Services",
+        industry: "Internet Software/Services",
+        currency: "USD",
+        exchange: "NASDAQ",
+        country: "United States",
+        quantity: 1,
+      },
+    ];
+    const actual = generateDoughNutChartData(holdings, "sector");
+    const expected = {
+      labels: ["Technology Services", "Retail Trade"],
       datasets: [
         {
-          data: [566.05125746, 143.73377200000002, 172.412812, 923.6045, 31.23446196],
+          data: [179.3 + 122.72, 144.34 + 173.14],
         },
       ],
-    });
-  });
+    };
+    expect(actual).toMatchObject(expected);
+
 });

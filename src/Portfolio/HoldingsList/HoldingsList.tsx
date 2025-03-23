@@ -8,16 +8,16 @@ import HoldingsListItem from './HoldingsListItem';
 const randomInteger = (limit: number) => Math.floor(Math.random() * limit)
 
 const HoldingsList: React.FC = () => {
-  const { tickers, selectedCategory, addTickers } = usePortfolio();
+  const { holdings, selectedCategory, addToHoldings } = usePortfolio();
   const [isLoading, setIsLoading] = useState(false)
 
   const fetchRandomTickers = async () => {
     setIsLoading(true);
     const tickers = await TickerApi.searchRandom(10)
     const randomTickers = tickers.map(t => {
-      return { ...t, quantity: String(randomInteger(100))}
+      return { ...t, quantity: randomInteger(100)}
     })
-    addTickers(randomTickers)
+    addToHoldings(randomTickers)
     setIsLoading(false);
   };
 
@@ -34,8 +34,8 @@ const HoldingsList: React.FC = () => {
         <div className="col-span-1">CMP</div>
         <div className="col-span-2">Qty</div>
       </div>
-      {tickers.length ? (
-        tickers.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
+      {holdings.length ? (
+        holdings.map((tik) => <HoldingsListItem key={tik.symbol} ticker={tik} />)
       ) : (
         <>
           <div className="col-span-6 w-full py-4 text-center text-sm text-slate-500">

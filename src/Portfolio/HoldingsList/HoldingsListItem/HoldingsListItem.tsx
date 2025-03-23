@@ -10,17 +10,17 @@ interface ITickersListItemProps {
 }
 
 const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
-  const { updateTicker, removeTicker, selectedCategory } = usePortfolio();
+  const { updateHolding, removeFromHoldings, selectedCategory } = usePortfolio();
 
   const updateQuantity = (e: React.FormEvent<HTMLInputElement>) => {
     const updatedValue = {
       ...ticker,
-      quantity: e.currentTarget.value,
+      quantity: parseInt(e.currentTarget.value),
     };
-    updateTicker(ticker.symbol, updatedValue);
+    updateHolding(ticker.symbol, updatedValue);
   };
 
-  const handleRemoveTicker = () => removeTicker(ticker.symbol);
+  const handleRemoveTicker = () => removeFromHoldings(ticker.symbol);
 
   return (
     <div
@@ -32,7 +32,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
         <p className="text-sm text-slate-500 truncate">{ticker.name}</p>
       </div>
       <div className="col-span-2 truncate">{ticker[selectedCategory]}</div>
-      <div className="col-span-1 font-medium">{ticker.price}</div>
+      <div className="col-span-1 font-medium">{ticker.price} {ticker.currency.toUpperCase()}</div>
       <div className="col-span-2 inline-flex items-center gap-1">
         <Input
           type="number"

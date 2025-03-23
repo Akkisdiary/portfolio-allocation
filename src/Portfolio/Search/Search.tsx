@@ -30,7 +30,7 @@ const Search: React.FC = (_) => {
   const [value, setValue] = useState('');
   const [suggs, setSuggs] = useState<TickerDetail[]>([]);
 
-  const { addTicker } = usePortfolio();
+  const { addToHoldings } = usePortfolio();
 
   const changeHandler = (
     _: React.FormEvent<HTMLElement>,
@@ -53,7 +53,7 @@ const Search: React.FC = (_) => {
     _: React.FormEvent<HTMLElement>,
     { suggestion }: SuggestionSelectedEventData<TickerDetail>
   ) => {
-    addTicker(suggestion);
+    addToHoldings([{...suggestion, quantity: 1}]);
     setValue('');
   };
 

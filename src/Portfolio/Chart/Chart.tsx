@@ -3,21 +3,20 @@ import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
 import { usePortfolio } from '../Manager';
-import { generateDoughNutChartData } from './utils';
+import { generateDoughNutChartData, priceByExchangeRate } from './utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart: React.FC = () => {
-  const { availableTickers, selectedCategory, currencyRates, selectedCurrency, metric } =
+  const { holdings, selectedCategory, exchangeRates, selectedCurrency } =
     usePortfolio();
 
-  let chartData = generateDoughNutChartData(
-    availableTickers(),
-    selectedCategory,
-    metric,
-    currencyRates,
-    selectedCurrency
-  );
+  for (let h of holdings) {
+    h['price'] = priceByExchangeRate(h['price'], h['currency'], selectedCurrency, exchangeRates);
+    h['currency'] = selectedCurrency
+  }
+
+  let chartData = generateDoughNutChartData(holdings, selectedCategory);
 
   if (
     chartData.datasets.length === 0 ||
