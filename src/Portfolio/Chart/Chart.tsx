@@ -32,26 +32,19 @@ const Chart: React.FC = () => {
     };
   }
 
-  const { innerWidth } = window
-
-  let chartRadius = 160
-  if (innerWidth <= 360) {
-    chartRadius = 100
-  } else if (innerWidth <= 640) {
-    chartRadius = 120
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
+    plugins: { legend: { position: 'right' as const, labels: { boxWidth: 12 } } },
+    layout: { padding: 10 },
   }
 
   return (
     <Doughnut
       data={chartData}
-      options={{
-        responsive: true,
-        maintainAspectRatio: false,
-        radius: chartRadius,
-        plugins: { legend: { position: 'bottom' } },
-        layout: { padding: 10 },
-      }}
-      data-testid="chart-canvas"
+      options={chartOptions}
+      data-testid='chart-canvas'
     />
   );
 };

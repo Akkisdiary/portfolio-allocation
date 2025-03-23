@@ -33,16 +33,16 @@ const Portfolio: React.FC = () => {
           <HoldingsList />
         </div>
         <div
-          className="relative order-2 h-full max-h-[50vh] min-h-[50vh] sm:max-h-[90vh] sm:min-h-[90vh]"
+          className="relative order-2"
           data-testid="graph-section"
         >
-          <div className="top-0 h-full sm:sticky sm:max-h-screen">
-            <div className="absolute top-0 mt-2 flex w-full justify-center gap-2 px-2 sm:right-0 sm:justify-end md:mr-2">
+          <div className="top-0 sm:sticky">
+            <div className="mt-2 flex w-full justify-center gap-2 px-2">
               <CurrencySelection />
               <MetricSelection />
               <CategorySelection />
             </div>
-            <Chart />
+            <div className="p-4 sm:py-12"><Chart /></div>
           </div>
         </div>
       </div>
