@@ -5,7 +5,6 @@ import React from 'react';
 import Chart from './Chart';
 import HoldingsList from './HoldingsList';
 import Manager from './Manager';
-import MetricSelection from './MetricSelection';
 import CategorySelection from './CategorySelection';
 import CurrencySelection from './CurrencySelection';
 import Search from './Search';
@@ -17,7 +16,7 @@ const Portfolio: React.FC = () => {
       <div className="bg-grid absolute inset-0 -z-10"></div>
       <div className="mt-4 mb-4 w-full px-2 text-center sm:mb-2 sm:text-start flex items-center justify-between">
         <h1 className="text-3xl font-extrabold text-slate-700 truncate">Portfolio Allocation</h1>
-        <a href="https://github.com/Akkisdiary/portfolio-allocation" target="_blank" className="inline-flex font-mono text-sm text-slate-500 underline p-1 gap-1 items-center">
+        <a href="https://github.com/Akkisdiary/portfolio-allocation" target="_blank" rel="noreferrer" className="inline-flex font-mono text-sm text-slate-500 underline p-1 gap-1 items-center">
           <span>source code</span>
           <GithubIcon />
         </a>
@@ -39,7 +38,6 @@ const Portfolio: React.FC = () => {
           <div className="top-0 sm:sticky">
             <div className="mt-2 flex w-full justify-center gap-2 px-2">
               <CurrencySelection />
-              <MetricSelection />
               <CategorySelection />
             </div>
             <div className="p-4 sm:py-12"><Chart /></div>
