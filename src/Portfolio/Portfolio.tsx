@@ -15,7 +15,7 @@ const Portfolio: React.FC = () => {
     <Manager>
       <div className="bg-grid absolute inset-0 -z-10"></div>
       <div className="mt-4 mb-4 w-full px-2 text-center sm:mb-2 sm:text-start">
-        <h1 className="text-3xl font-extrabold text-slate-700">Protfolio by Sector</h1>
+        <h1 className="text-3xl font-extrabold text-slate-700">Portfolio Allocation</h1>
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-2">
         <div
