@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v4.3.0
         with:
-          node-version: 'lts'
-          registry-url: https://npm.pkg.github.com/
+          node-version: 'lts/23.10'
       - run: npm install --frozen-lockfile
       - run: npm run test
