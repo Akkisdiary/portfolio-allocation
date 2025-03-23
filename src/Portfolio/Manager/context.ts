@@ -1,47 +1,35 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-import { Metric } from './enums';
+import {
+  DEFAULT_SELECTED_CATEGORY,
+  DEFAULT_SELECTED_CURRENCY,
+} from "./constants";
 
-import type { TickerDetail } from '../../api';
-import type { TickerHolding, SelectableCategory, CurrencyRates } from './types';
-
-export const SELECTABLE_CATEGORIES: SelectableCategory[] = ['sector', 'industry', 'country'];
-export const DEFAULT_SELECTED_CATEGORY: SelectableCategory = 'sector';
-export const DEFAULT_SELECTED_CURRENCY = 'inr';
+import type { TickerHolding, SelectableCategory, ExchangeRates } from "./types";
 
 export interface IPortfolioCtx {
-  tickers: TickerHolding[];
-  selectableCategories: SelectableCategory[];
+  holdings: TickerHolding[];
   selectedCategory: SelectableCategory;
-  selectableCurrencies: string[];
   selectedCurrency: string;
-  currencyRates: CurrencyRates;
-  metric: Metric;
-  setMetric: (m: Metric) => void;
-  updateTicker: (symbol: string, newValue: TickerHolding) => void;
-  addTicker: (tik: TickerDetail) => void;
-  addTickers: (tik: TickerDetail[]) => void;
-  availableTickers: () => TickerHolding[];
-  removeTicker: (symbolToRemove: string) => void;
-  updateSelectedCategory: (cat: SelectableCategory) => void;
+  selectableCurrencies: string[];
+  exchangeRates: ExchangeRates;
+  addToHoldings: (tik: TickerHolding[]) => void;
+  updateHolding: (symbol: string, newValue: TickerHolding) => void;
+  removeFromHoldings: (symbolToRemove: string) => void;
+  setSelectedCategory: (cat: SelectableCategory) => void;
   setSelectedCurrency: (code: string) => void;
 }
 
 const PortfolioCtx = createContext<IPortfolioCtx>({
-  tickers: [],
-  selectableCategories: SELECTABLE_CATEGORIES,
+  holdings: [],
   selectedCategory: DEFAULT_SELECTED_CATEGORY,
   selectableCurrencies: [],
   selectedCurrency: DEFAULT_SELECTED_CURRENCY,
-  currencyRates: {},
-  metric: Metric.PERCENTAGE,
-  setMetric: () => {},
-  updateTicker: () => {},
-  addTicker: () => {},
-  addTickers: () => {},
-  availableTickers: () => [],
-  removeTicker: () => {},
-  updateSelectedCategory: () => {},
+  exchangeRates: {},
+  updateHolding: () => {},
+  addToHoldings: () => {},
+  removeFromHoldings: () => {},
+  setSelectedCategory: () => {},
   setSelectedCurrency: () => {},
 });
 

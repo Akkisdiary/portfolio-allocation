@@ -19,8 +19,7 @@ const tickers = [
     currency: 'USD',
     exchange: 'NASDAQ',
     country: 'United States',
-    // url: 'https://www.tradingview.com/symbols/AAPL/',
-    quantity: '1',
+    quantity: 1,
   },
   {
     id: 'NASDAQ:GOOG',
@@ -32,14 +31,13 @@ const tickers = [
     currency: 'USD',
     exchange: 'NASDAQ',
     country: 'United States',
-    // url: 'https://www.tradingview.com/symbols/GOOG/',
-    quantity: '1',
+    quantity: 1,
   },
 ];
 
 export const renderTickersList = (data: TickerHolding[]) => {
   render(
-    <Manager initialData={data}>
+    <Manager>
       <TickersList />
     </Manager>
   );

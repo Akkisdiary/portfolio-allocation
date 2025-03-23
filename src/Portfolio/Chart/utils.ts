@@ -1,10 +1,7 @@
-import { Metric } from '../Manager';
-
 import type { ChartData } from 'chart.js';
-import type { SelectableCategory, TickerHolding, CurrencyRates } from '../Manager';
-import { DEFAULT_SELECTED_CURRENCY } from '../Manager/context';
+import type { SelectableCategory, TickerHolding, ExchangeRates } from '../Manager';
 
-const colors = [
+const COLORS = [
   '#f87171',
   '#fbbf24',
   '#a3e635',
@@ -20,56 +17,65 @@ const colors = [
   '#f472b6',
 ];
 
+/**
+ * Converts a price from one currency to another using the provided exchange rates.
+ *
+ * The conversion is performed via an intermediary default currency, defined as `DEFAULT_SELECTED_CURRENCY`.
+ * Currency codes are case-insensitive.
+ *
+ * @param price - The price value to be converted.
+ * @param fromCurrency - The currency code of the original price (e.g., 'USD').
+ * @param toCurrency - The target currency code to convert the price to (e.g., 'EUR').
+ * @param exchangeRates - An object containing exchange rates in the format `{ 'base-target': rate }`.
+ *                        The function expects rates for conversions involving the default currency.
+ * @returns The converted price in the target currency. If conversion is not possible (e.g., missing rates),
+ *          returns the original price.
+ */
+export const priceByExchangeRate = (
+  price: number,
+  fromCurrency: string,
+  toCurrency: string,
+  exchangeRates: ExchangeRates,
+): number => {
+  fromCurrency = fromCurrency.toLowerCase();
+  toCurrency = toCurrency.toLocaleLowerCase();
+  
+  if (fromCurrency === toCurrency) {
+    return price
+  }
+  const directRate = exchangeRates[`${fromCurrency}-${toCurrency}`];
+  if (directRate) {
+    return price * directRate;
+  }
+  const reverseRate = exchangeRates[`${toCurrency}-${fromCurrency}`];
+  if (reverseRate) {
+    return price / reverseRate;
+  }
+  return NaN;
+}
+
 export const generateDoughNutChartData = (
   data: TickerHolding[],
-  key: SelectableCategory,
-  metric: Metric,
-  currencyRates: CurrencyRates,
-  currencyIn: string
+  attribute: SelectableCategory,
 ): ChartData<'doughnut'> => {
-  const memo: {
-    [key: string]: number;
-  } = {};
+  const agg: {[key: string]: number} = {}
 
-  for (const tik of data) {
-    const tikCurrency = tik.currency;
-    const quantity = tik.quantity ? parseInt(tik.quantity) : 0;
+  for (let i = 0; i < data.length; i++) {
+    const h = data[i];
 
-    let value = tik.price * quantity;
+    const category = h[attribute];
+    const quantity = h.quantity;
+    let value = h.price * quantity;
 
-    if (tikCurrency.toLowerCase() !== DEFAULT_SELECTED_CURRENCY.toLowerCase()) {
-      const defaultRate =
-        currencyRates[`${tikCurrency.toLowerCase()}-${DEFAULT_SELECTED_CURRENCY.toLowerCase()}`];
-      value = value * defaultRate;
-    }
-
-    if (DEFAULT_SELECTED_CURRENCY.toLowerCase() !== currencyIn.toLowerCase()) {
-      const conversionRate =
-        currencyRates[`${DEFAULT_SELECTED_CURRENCY.toLowerCase()}-${currencyIn.toLowerCase()}`];
-      value = value * conversionRate;
-    }
-
-    const name = tik[key];
-    memo[name] = memo[name] ? memo[name] + value : value;
+    agg[category] = (agg[category] || 0) + value
   }
 
-  const labels: string[] = [];
-  const values: number[] = [];
+  const labels: string[] = Object.keys(agg);
+  const values: number[] = Object.values(agg);
   const bgColors: string[] = [];
 
-  Object.entries(memo).forEach(([k, v], idx) => {
-    labels.push(k);
-    values.push(v);
-    const c = colors[idx % colors.length];
-    bgColors.push(c);
-  });
-
-  if (metric === Metric.PERCENTAGE) {
-    const total = values.reduce((accumulator, value) => accumulator + value, 0);
-    for (let i = 0; i < values.length; i++) {
-      const percentage = (values[i] / total) * 100;
-      values[i] = Math.round((percentage + Number.EPSILON) * 100) / 100;
-    }
+  for (let i = 0; i < labels.length; i++) {
+    bgColors.push(COLORS[i % COLORS.length]);
   }
 
   return {

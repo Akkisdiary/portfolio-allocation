@@ -1,14 +1,11 @@
 import { TickerDetail } from '../../api';
 
 export interface TickerHolding extends TickerDetail {
-  quantity?: string;
+  quantity: number;
 }
 
-export type SelectableCategory = Exclude<
-  keyof TickerHolding,
-  'id' | 'name' | 'symbol' | 'price' | 'quantity'
->;
+export type SelectableCategory = 'sector' | 'industry' | 'country';
 
-export type CurrencyRates = {
+export type ExchangeRates = {
   [key: string]: number;
 };
