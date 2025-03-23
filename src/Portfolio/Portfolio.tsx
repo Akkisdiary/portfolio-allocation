@@ -9,13 +9,18 @@ import MetricSelection from './MetricSelection';
 import CategorySelection from './CategorySelection';
 import CurrencySelection from './CurrencySelection';
 import Search from './Search';
+import { GithubIcon } from '../components';
 
 const Portfolio: React.FC = () => {
   return (
     <Manager>
       <div className="bg-grid absolute inset-0 -z-10"></div>
-      <div className="mt-4 mb-4 w-full px-2 text-center sm:mb-2 sm:text-start">
+      <div className="mt-4 mb-4 w-full px-2 text-center sm:mb-2 sm:text-start flex justify-between">
         <h1 className="text-3xl font-extrabold text-slate-700">Portfolio Allocation</h1>
+        <a href="https://github.com/Akkisdiary/portfolio-allocation" target="_blank" className="inline-flex font-mono text-sm text-slate-500 underline p-1 gap-2 items-center">
+          <span>source code</span>
+          <GithubIcon />
+        </a>
       </div>
       <div className="relative grid grid-cols-1 md:grid-cols-2">
         <div
