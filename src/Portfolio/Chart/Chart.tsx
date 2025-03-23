@@ -35,7 +35,9 @@ const Chart: React.FC = () => {
   const { innerWidth } = window
 
   let chartRadius = 160
-  if (innerWidth <= 640) {
+  if (innerWidth <= 360) {
+    chartRadius = 100
+  } else if (innerWidth <= 640) {
     chartRadius = 120
   }
 
