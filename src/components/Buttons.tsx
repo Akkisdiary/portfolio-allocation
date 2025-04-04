@@ -44,9 +44,8 @@ export const DeleteButton: React.FC<IButtonProps> = ({ children, className, isLo
 
 export const LitUpButton: React.FC<IButtonProps> = ({ children, className, isLoading = false, ...props }) => {
   return (
-    <button className="p-[2px] overflow-clip border border-sky-600 relative rounded-full shadow shadow-slate-500" {...props}>
-      <div className="absolute inset-[-200%] animate-[spin_2s_linear_infinite] bg-gradient-to-b from-indigo-200 from-10% via-sky-500 via-30% to-emerald-800 to-90%" />
-      <div className="px-8 py-2 font-bold bg-sky-900 rounded-full relative group transition duration-700 text-white hover:bg-transparent">
+    <button className="p-[2px] overflow-clip relative rounded-full" {...props}>
+      <div className="px-8 py-2 font-bold rounded-full relative group transition duration-300 text-white hover:text-slate-700 bg-sky-900 hover:bg-gradient-to-r from-violet-200 to-pink-200">
         {isLoading ? <Spinner /> : children}
       </div>
     </button>
