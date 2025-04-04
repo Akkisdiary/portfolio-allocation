@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 import TickerApi, { CurrencyConversionRate } from '../../api';
 import PortfolioCtx from './context'
@@ -53,7 +53,7 @@ const Manager: React.FC<{
     if (!exchangeRates.length) {
       TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
     }
-  }, []);
+  }, [exchangeRates.length]);
 
   useEffect(() => {
     setHoldings(old => {
@@ -65,7 +65,7 @@ const Manager: React.FC<{
       })
       return _new;
     })
-  }, [selectedCurrency]);
+  }, [selectedCurrency, exchangeRates]);
 
   const addToHoldings = (t: TickerDetail[]) => {
     setHoldings(old => {
