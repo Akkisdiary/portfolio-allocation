@@ -32,7 +32,7 @@ const TickersListItem: React.FC<ITickersListItemProps> = ({ ticker }) => {
         <p className="text-sm text-slate-500 truncate">{ticker.name}</p>
       </div>
       <div className="col-span-2 truncate">{ticker[selectedCategory]}</div>
-      <div className="col-span-1 font-medium">{ticker.price} {ticker.currency.toUpperCase()}</div>
+      <div className="col-span-1 font-medium">{ticker.price}</div>
       <div className="col-span-2 inline-flex items-center gap-1">
         <Input
           type="number"
