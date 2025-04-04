@@ -12,7 +12,7 @@ const CurrencySelection: React.FC = () => {
 
   return (
     <Select
-      value={selectedCurrency}
+      value={selectableCurrencies.find(o => o.toLowerCase() === selectedCurrency.toLowerCase())}
       onChange={currencyChangeHandler}
       options={selectableCurrencies}
       data-testid="currency-selection"

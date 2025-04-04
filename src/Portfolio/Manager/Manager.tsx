@@ -50,10 +50,8 @@ const Manager: React.FC<{
   }, [currencyConversionData]);
 
   useEffect(() => {
-    if (!exchangeRates.length) {
-      TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
-    }
-  }, [exchangeRates.length]);
+    TickerApi.currencyRates(DEFAULT_SELECTED_CURRENCY).then(setCurrencyConversionData);
+  }, []);
 
   useEffect(() => {
     setHoldings(old => {
@@ -67,9 +65,14 @@ const Manager: React.FC<{
     })
   }, [selectedCurrency, exchangeRates]);
 
-  const addToHoldings = (t: TickerDetail[]) => {
+  const addToHoldings = (tickers: TickerDetail[]) => {
     setHoldings(old => {
-      const newHoldings = t.map(t => {return { quantity: 1, ...t }}).filter(h => !!h.sector);
+      const newHoldings = tickers.map(t => {
+        const convertedPrice = priceByExchangeRate(t.price, t.currency, selectedCurrency, exchangeRates)
+        t.price = parseFloat(convertedPrice.toFixed(1));
+        t.currency = selectedCurrency
+        return { quantity: 1, ...t }
+      }).filter(h => !!h.sector);
       return [...old, ...newHoldings];
     })
   };
@@ -86,8 +89,8 @@ const Manager: React.FC<{
     })
   };
 
-  const removeFromHoldings = (symbolToRemove: string) => {
-    setHoldings(holdings.filter((tik) => tik.symbol !== symbolToRemove));
+  const removeFromHoldings = (symbol: string) => {
+    setHoldings(holdings.filter((tik) => tik.symbol !== symbol));
   };
 
   return (
