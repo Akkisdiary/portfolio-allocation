@@ -7,8 +7,9 @@ import TickerApi from '../../api';
 import { SearchIcon } from '../../components';
 import { usePortfolio } from '../Manager/hooks';
 import Suggestion from './Suggestion';
+import { useDebounce } from './utils';
 
-import type { SuggestionSelectedEventData, RenderInputComponentProps } from 'react-autosuggest';
+import type { RenderInputComponentProps, SuggestionSelectedEventData } from 'react-autosuggest';
 
 import type { TickerDetail } from '../../api';
 
@@ -57,10 +58,12 @@ const Search: React.FC = (_) => {
     setValue('');
   };
 
+  const fetchSuggsDebounced = useDebounce(fetchSuggs);
+
   return (
     <Autosuggest<TickerDetail>
       suggestions={suggs}
-      onSuggestionsFetchRequested={fetchSuggs}
+      onSuggestionsFetchRequested={fetchSuggsDebounced}
       onSuggestionsClearRequested={clearSuggs}
       getSuggestionValue={(tik) => tik.symbol}
       renderSuggestion={(s, p) => <Suggestion suggestion={s} params={p} />}

@@ -1,11 +1,13 @@
-import { cleanup, fireEvent, render, screen, act, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { setUpServer } from '../../api/mock/utils';
 import Manager from '../Manager';
 import Search from './Search';
-import { getSearchInput } from './utils';
+
 
 setUpServer([cleanup]);
+
+const getSearchInput = () => screen.getByPlaceholderText<HTMLInputElement>(/search/i);
 
 export const suggsBoxToBeVisible = async () => {
   const box = screen.getAllByRole('listbox')[0];
