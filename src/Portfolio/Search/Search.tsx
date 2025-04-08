@@ -58,7 +58,7 @@ const Search: React.FC = (_) => {
     setValue('');
   };
 
-  const fetchSuggsDebounced = useDebounce(fetchSuggs);
+  const fetchSuggsDebounced = useDebounce(fetchSuggs, 500);
 
   return (
     <Autosuggest<TickerDetail>
