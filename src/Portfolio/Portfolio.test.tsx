@@ -2,10 +2,10 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testi
 
 import { setUpServer } from '../api/mock/utils';
 import Portfolio from './Portfolio';
-import { getSearchInput } from './Search/utils';
 
 setUpServer([cleanup]);
 
+const getSearchInput = () => screen.getByPlaceholderText<HTMLInputElement>(/search/i);
 const getGraphSection = () => screen.getByTestId('graph-section');
 const getHoldingsList = () => screen.getByTestId('holdings-list');
 
